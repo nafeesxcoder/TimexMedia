@@ -14,7 +14,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Timex Media - Real Estate Photography, Video & Marketing",
-  description: "Premier full-service creative agency specializing in real estate photography, videography, aerial drone services, 3D virtual tours, and comprehensive marketing solutions.",
+  description:
+    "Premier full-service creative agency specializing in real estate photography, videography, aerial drone services, 3D virtual tours, and comprehensive marketing solutions.",
 };
 
 export const viewport: Viewport = {
