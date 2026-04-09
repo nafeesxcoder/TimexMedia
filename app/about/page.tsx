@@ -3,6 +3,7 @@ import Footer from "../components/Footer";
 import AboutSection from "./AboutSection";
 import TeamSection from "./TeamSection";
 import StatsSection from "./StatsSection";
+import ProcessSection from "./ProcessSection";
 import AnimateOnView from "../components/AnimateOnView";
 import Image from "next/image";
 import Link from "next/link";
@@ -58,6 +59,7 @@ export default function AboutPage() {
       <AboutSection variant="full" showCta={true} />
       <TeamSection />
       <StatsSection />
+      <ProcessSection />
 
       {/* Contact strip - same as before */}
       <section className="border-t border-white/10 bg-black/30 py-6 sm:py-8 px-4 sm:px-6 lg:px-8">
