@@ -9,12 +9,36 @@ import { SERVICES } from "./lib/services";
 /** All video paths under public/vedio - used across video sections */
 const VIDEOS = {
   reels: [
-    { src: "videoForHome/1.mp4", poster: "thumbnails/videoForHome/1-poster.jpg", title: "Listing reel 1" },
-    { src: "videoForHome/2.mp4", poster: "thumbnails/videoForHome/2-poster.jpg", title: "Listing reel 2" },
-    { src: "videoForHome/3.mp4", poster: "thumbnails/videoForHome/3-poster.jpg", title: "Listing reel 3" },
-    { src: "videoForHome/4.mp4", poster: "thumbnails/videoForHome/4-poster.jpg", title: "Listing reel 4" },
-    { src: "videoForHome/5.mp4", poster: "thumbnails/videoForHome/5-poster.jpg", title: "Listing reel 5" },
-    { src: "videoForHome/6.mp4", poster: "thumbnails/videoForHome/6-poster.jpg", title: "Listing reel 6" },
+    {
+      src: "videoForHome/1.mp4",
+      poster: "thumbnails/videoForHome/1-poster.jpg",
+      title: "Listing reel 1",
+    },
+    {
+      src: "videoForHome/2.mp4",
+      poster: "thumbnails/videoForHome/2-poster.jpg",
+      title: "Listing reel 2",
+    },
+    {
+      src: "videoForHome/3.mp4",
+      poster: "thumbnails/videoForHome/3-poster.jpg",
+      title: "Listing reel 3",
+    },
+    {
+      src: "videoForHome/4.mp4",
+      poster: "thumbnails/videoForHome/4-poster.jpg",
+      title: "Listing reel 4",
+    },
+    {
+      src: "videoForHome/5.mp4",
+      poster: "thumbnails/videoForHome/5-poster.jpg",
+      title: "Listing reel 5",
+    },
+    {
+      src: "videoForHome/6.mp4",
+      poster: "thumbnails/videoForHome/6-poster.jpg",
+      title: "Listing reel 6",
+    },
   ],
   showcase: [
     { src: "video002.mp4", title: "Listing video 1" },
@@ -32,7 +56,12 @@ export default function Home() {
       {/* Hero Section - responsive heights for all viewports */}
       <section className="relative h-[70vh] min-h-[400px] sm:min-h-[500px] max-h-[90dvh] flex items-center justify-center overflow-hidden">
         {/* Background Image from Unsplash */}
-        <AnimateOnView animation="blur-in" className="absolute inset-0" rootMargin="0px" threshold={0.2}>
+        <AnimateOnView
+          animation="blur-in"
+          className="absolute inset-0"
+          rootMargin="0px"
+          threshold={0.2}
+        >
           <Image
             src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2073&auto=format&fit=crop"
             alt="Modern home interior"
@@ -47,7 +76,12 @@ export default function Home() {
 
         {/* Hero Content */}
         <div className="relative z-10 text-center px-4 w-full max-w-[100vw]">
-          <AnimateOnView animation="float-in" delay="0.2s" rootMargin="0px" threshold={0.2}>
+          <AnimateOnView
+            animation="float-in"
+            delay="0.2s"
+            rootMargin="0px"
+            threshold={0.2}
+          >
             <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold text-brand tracking-tight break-words">
               Timex Media
             </h1>
@@ -70,21 +104,26 @@ export default function Home() {
             </AnimateOnView>
 
             {/* Right Column */}
-            <AnimateOnView animation="fade-in-right" delay="0.15s" className="space-y-6 text-gray-300 leading-relaxed">
+            <AnimateOnView
+              animation="fade-in-right"
+              delay="0.15s"
+              className="space-y-6 text-gray-300 leading-relaxed"
+            >
               <p className="text-base sm:text-lg">
-                Timex Media is a premier full-service creative agency specializing
-                in delivering exceptional photography, videography, aerial drone
-                services, immersive 3D virtual tours, and comprehensive real estate
-                marketing solutions. Our passionate team is committed to working
-                tirelessly to maximize your efficiency and help you achieve your
-                business goals.
+                Timex Media is a premier full-service creative agency
+                specializing in delivering exceptional photography, videography,
+                aerial drone services, immersive 3D virtual tours, and
+                comprehensive real estate marketing solutions. Our passionate
+                team is committed to working tirelessly to maximize your
+                efficiency and help you achieve your business goals.
               </p>
 
               <p className="text-base sm:text-lg">
-                With lightning-fast turnaround times, breathtaking visual content,
-                and unwavering commitment to quality, our services enable clients to
-                stand out in a competitive market, establish a distinctive brand
-                identity, and position themselves as industry leaders.
+                With lightning-fast turnaround times, breathtaking visual
+                content, and unwavering commitment to quality, our services
+                enable clients to stand out in a competitive market, establish a
+                distinctive brand identity, and position themselves as industry
+                leaders.
               </p>
 
               <div className="pt-4 border-t border-gray-500/50">
@@ -92,10 +131,11 @@ export default function Home() {
                   Service Areas:
                 </p>
                 <p className="text-base sm:text-lg text-gray-300">
-                  Currently serving major metropolitan areas including San Francisco,
-                  Oakland, San Jose, Sacramento, Fresno, and surrounding communities
-                  throughout Northern California. We are actively expanding our reach
-                  to serve clients across the West Coast.
+                  Currently serving major metropolitan areas including San
+                  Francisco, Oakland, San Jose, Sacramento, Fresno, and
+                  surrounding communities throughout Northern California. We are
+                  actively expanding our reach to serve clients across the West
+                  Coast.
                 </p>
               </div>
 
@@ -103,8 +143,8 @@ export default function Home() {
                 <p className="text-base sm:text-lg text-gray-300">
                   <span className="font-semibold text-white">Coming Soon:</span>{" "}
                   We are excited to announce our expansion into the greater Los
-                  Angeles area and Southern California region, bringing our premium
-                  services to even more clients.
+                  Angeles area and Southern California region, bringing our
+                  premium services to even more clients.
                 </p>
               </div>
             </AnimateOnView>
@@ -121,14 +161,24 @@ export default function Home() {
                 What we offer
               </p>
             </AnimateOnView>
-            <AnimateOnView animation="fade-in-up" delay="0.08s" className="mt-2">
+            <AnimateOnView
+              animation="fade-in-up"
+              delay="0.08s"
+              className="mt-2"
+            >
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight">
-                Services built for <span className="text-brand">real estate</span>
+                Services built for{" "}
+                <span className="text-brand">real estate</span>
               </h2>
             </AnimateOnView>
-            <AnimateOnView animation="fade-in-left" delay="0.16s" className="mt-4">
+            <AnimateOnView
+              animation="fade-in-left"
+              delay="0.16s"
+              className="mt-4"
+            >
               <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-                From listing photos and cinematic videos to 3D tours, social content, and branding—we help you list faster and stand out.
+                From listing photos and cinematic videos to 3D tours, social
+                content, and branding—we help you list faster and stand out.
               </p>
             </AnimateOnView>
           </div>
@@ -147,8 +197,13 @@ export default function Home() {
                 delay={`${0.2 + i * 0.06}s`}
                 className="flex items-center gap-2 rounded-full border border-white/25 bg-white/5 px-4 sm:px-5 py-2.5 sm:py-3"
               >
-                <span className="h-2 w-2 rounded-full bg-brand shrink-0" aria-hidden />
-                <span className="text-gray-200 text-sm sm:text-base font-medium">{label}</span>
+                <span
+                  className="h-2 w-2 rounded-full bg-brand shrink-0"
+                  aria-hidden
+                />
+                <span className="text-gray-200 text-sm sm:text-base font-medium">
+                  {label}
+                </span>
               </AnimateOnView>
             ))}
           </div>
@@ -173,14 +228,23 @@ export default function Home() {
                   </p>
                   <span className="mt-3 sm:mt-4 inline-flex items-center gap-1.5 text-brand text-sm sm:text-base font-medium">
                     Learn more
-                    <span className="transition-transform group-hover:translate-x-1" aria-hidden>→</span>
+                    <span
+                      className="transition-transform group-hover:translate-x-1"
+                      aria-hidden
+                    >
+                      →
+                    </span>
                   </span>
                 </Link>
               </AnimateOnView>
             ))}
           </div>
 
-          <AnimateOnView animation="fade-in-up" delay="0.4s" className="mt-10 sm:mt-12 md:mt-14 text-center">
+          <AnimateOnView
+            animation="fade-in-up"
+            delay="0.4s"
+            className="mt-10 sm:mt-12 md:mt-14 text-center"
+          >
             <Link
               href="/services"
               className="inline-flex items-center justify-center min-h-[48px] px-6 sm:px-8 py-3 sm:py-4 bg-brand hover:bg-brand-600 text-white text-base sm:text-lg font-semibold rounded-lg transition-colors focus:outline-none focus:ring-2 focus:ring-brand focus:ring-offset-2 focus:ring-offset-transparent"
@@ -200,17 +264,25 @@ export default function Home() {
                 Social-first content
               </p>
             </AnimateOnView>
-            <AnimateOnView animation="fade-in-up" delay="0.08s" className="mt-2">
+            <AnimateOnView
+              animation="fade-in-up"
+              delay="0.08s"
+              className="mt-2"
+            >
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight">
                 Reels that make listings{" "}
                 <span className="text-brand">impossible to scroll past</span>
               </h2>
             </AnimateOnView>
-            <AnimateOnView animation="fade-in-left" delay="0.16s" className="mt-4 max-w-3xl">
+            <AnimateOnView
+              animation="fade-in-left"
+              delay="0.16s"
+              className="mt-4 max-w-3xl"
+            >
               <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
                 Short-form video is the fastest way to build trust, showcase
-                lifestyle, and turn views into showings. Here are two examples of
-                the style we produce for agents and teams.
+                lifestyle, and turn views into showings. Here are two examples
+                of the style we produce for agents and teams.
               </p>
             </AnimateOnView>
           </div>
@@ -218,7 +290,11 @@ export default function Home() {
           <div className="space-y-14 md:space-y-20">
             {/* Row 1 */}
             <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-              <AnimateOnView animation="fade-in-left" delay="0.1s" className="order-2 lg:order-1">
+              <AnimateOnView
+                animation="fade-in-left"
+                delay="0.1s"
+                className="order-2 lg:order-1"
+              >
                 <h3 className="text-2xl sm:text-3xl font-bold text-white">
                   Expand your reach with{" "}
                   <span className="text-brand">Reels</span>
@@ -230,7 +306,11 @@ export default function Home() {
                 </p>
 
                 <div className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
-                  <AnimateOnView animation="scale-in" delay="0.2s" className="rounded-2xl border border-white/20 bg-white/5 p-5">
+                  <AnimateOnView
+                    animation="scale-in"
+                    delay="0.2s"
+                    className="rounded-2xl border border-white/20 bg-white/5 p-5"
+                  >
                     <p className="text-sm font-semibold text-white">
                       Built for attention
                     </p>
@@ -239,7 +319,11 @@ export default function Home() {
                       color.
                     </p>
                   </AnimateOnView>
-                  <AnimateOnView animation="scale-in" delay="0.28s" className="rounded-2xl border border-white/20 bg-white/5 p-5">
+                  <AnimateOnView
+                    animation="scale-in"
+                    delay="0.28s"
+                    className="rounded-2xl border border-white/20 bg-white/5 p-5"
+                  >
                     <p className="text-sm font-semibold text-white">
                       Ready to post
                     </p>
@@ -251,7 +335,11 @@ export default function Home() {
                 </div>
               </AnimateOnView>
 
-              <AnimateOnView animation="float-in" delay="0.15s" className="order-1 lg:order-2">
+              <AnimateOnView
+                animation="float-in"
+                delay="0.15s"
+                className="order-1 lg:order-2"
+              >
                 <LocalVideo
                   src={VIDEOS.reels[0].src}
                   title={VIDEOS.reels[0].title}
@@ -283,7 +371,11 @@ export default function Home() {
                   of mind.
                 </p>
 
-                <AnimateOnView animation="pop-in" delay="0.25s" className="mt-6 rounded-2xl bg-brand/20 border border-brand/40 p-6">
+                <AnimateOnView
+                  animation="pop-in"
+                  delay="0.25s"
+                  className="mt-6 rounded-2xl bg-brand/20 border border-brand/40 p-6"
+                >
                   <p className="text-sm font-semibold text-white">
                     What you get
                   </p>
@@ -317,14 +409,23 @@ export default function Home() {
                 Our work
               </p>
             </AnimateOnView>
-            <AnimateOnView animation="fade-in-up" delay="0.08s" className="mt-2">
+            <AnimateOnView
+              animation="fade-in-up"
+              delay="0.08s"
+              className="mt-2"
+            >
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight">
                 Listing videos that <span className="text-brand">sell</span>
               </h2>
             </AnimateOnView>
-            <AnimateOnView animation="fade-in-left" delay="0.16s" className="mt-4 max-w-2xl mx-auto">
+            <AnimateOnView
+              animation="fade-in-left"
+              delay="0.16s"
+              className="mt-4 max-w-2xl mx-auto"
+            >
               <p className="text-base sm:text-lg text-gray-300 leading-relaxed">
-                Cinematic walkthroughs and lifestyle clips that showcase every property at its best.
+                Cinematic walkthroughs and lifestyle clips that showcase every
+                property at its best.
               </p>
             </AnimateOnView>
           </div>
@@ -336,11 +437,7 @@ export default function Home() {
                 delay={`${0.1 + i * 0.06}s`}
                 className="min-w-0"
               >
-                <LocalVideo
-                  src={v.src}
-                  title={v.title}
-                  aspect="horizontal"
-                />
+                <LocalVideo src={v.src} title={v.title} aspect="horizontal" />
               </AnimateOnView>
             ))}
           </div>
@@ -356,7 +453,11 @@ export default function Home() {
                 Social reels
               </p>
             </AnimateOnView>
-            <AnimateOnView animation="fade-in-up" delay="0.08s" className="mt-2">
+            <AnimateOnView
+              animation="fade-in-up"
+              delay="0.08s"
+              className="mt-2"
+            >
               <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-tight">
                 More <span className="text-brand">scroll-stopping</span> content
               </h2>
