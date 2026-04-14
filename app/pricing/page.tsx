@@ -3,6 +3,8 @@ import Footer from "../components/Footer";
 import AnimateOnView from "../components/AnimateOnView";
 import Image from "next/image";
 import Link from "next/link";
+import ComparisonTable from "./ComparisonTable";
+import TrustBadges from "./TrustBadges";
 
 export const metadata = {
   title: "Pricing - Timex Media",
@@ -100,7 +102,7 @@ export default function PricingPage() {
     <div className="min-h-screen overflow-x-hidden w-full max-w-[100vw] text-gray-100 bg-black">
       <Header />
 
-      {/* Hero Section  */}
+      {/* Hero Section */}
       <section className="relative h-[40vh] min-h-[280px] sm:min-h-[320px] md:min-h-[380px] max-h-[55dvh] flex items-center justify-center overflow-hidden">
         <AnimateOnView
           animation="blur-in"
@@ -220,6 +222,12 @@ export default function PricingPage() {
           </div>
         </div>
       </section>
+
+      {/* Comparison Table */}
+      <ComparisonTable />
+
+      {/* Trust Badges - */}
+      <TrustBadges />
 
       {/* Add-ons Section */}
       <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 bg-black/20">
