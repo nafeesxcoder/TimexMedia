@@ -12,8 +12,7 @@ export const metadata = {
 const BLOG_POSTS = [
   {
     id: 1,
-    title:
-      "Why Great Listing Media Still Wins in Real Estate",
+    title: "Why Great Listing Media Still Wins in Real Estate",
     date: "Monday, February 20, 2025",
     author: "Timex Media",
     intro:
@@ -35,8 +34,7 @@ const BLOG_POSTS = [
   },
   {
     id: 2,
-    title:
-      "Using Social Media and Branding to Grow Your Real Estate Presence",
+    title: "Using Social Media and Branding to Grow Your Real Estate Presence",
     date: "Wednesday, February 8, 2025",
     author: "Timex Media",
     intro:
@@ -58,8 +56,7 @@ const BLOG_POSTS = [
   },
   {
     id: 3,
-    title:
-      "How Professional Photography and Video Support Your Listings",
+    title: "How Professional Photography and Video Support Your Listings",
     date: "Friday, January 26, 2025",
     author: "Timex Media",
     intro:
@@ -81,8 +78,7 @@ const BLOG_POSTS = [
   },
   {
     id: 4,
-    title:
-      "Building Your Personal Brand With Quality Content",
+    title: "Building Your Personal Brand With Quality Content",
     date: "Tuesday, January 14, 2025",
     author: "Timex Media",
     intro:
@@ -237,12 +233,6 @@ export default function BlogPage() {
                 d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
               />
             </svg>
-            <a
-              href="tel:+15551234567"
-              className="text-white hover:text-brand-300 transition-colors"
-            >
-              (555) 123-4567
-            </a>
           </span>
         </div>
       </section>
