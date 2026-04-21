@@ -98,7 +98,8 @@ export default function BookNowForm() {
           Request received
         </h3>
         <p className="text-gray-300 text-base sm:text-lg">
-          Thanks for booking with Timex Media. We’ll reach out shortly to confirm your shoot and answer any questions.
+          Thanks for booking with Timex Media. We’ll reach out shortly to
+          confirm your shoot and answer any questions.
         </p>
       </div>
     );
@@ -138,14 +139,25 @@ export default function BookNowForm() {
         <div className="space-y-4">
           <h3 className="text-lg sm:text-xl font-bold text-white">Address</h3>
           <p className="text-gray-400 text-sm sm:text-base">
-            Enter the property address below. For apartments or units, include the unit number.
+            Enter the property address below. For apartments or units, include
+            the unit number.
           </p>
           {!data.useManualAddress ? (
             <>
               <div className="relative">
                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                  <svg
+                    className="w-5 h-5"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                    />
                   </svg>
                 </span>
                 <input
@@ -206,7 +218,9 @@ export default function BookNowForm() {
             </>
           )}
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Square footage (optional)</label>
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              Square footage (optional)
+            </label>
             <input
               type="text"
               inputMode="numeric"
@@ -217,12 +231,17 @@ export default function BookNowForm() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Is the property vacant or occupied?</label>
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              Is the property vacant or occupied?
+            </label>
             <select
               value={data.occupancy}
               onChange={(e) => update({ occupancy: e.target.value })}
               className="w-full px-4 py-3 rounded-lg border border-white/20 bg-white/5 text-white focus:outline-none focus:ring-2 focus:ring-brand appearance-none bg-no-repeat bg-[length:20px] bg-[right_0.75rem_center] pr-10"
-              style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E\")" }}
+              style={{
+                backgroundImage:
+                  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E\")",
+              }}
             >
               <option value="">Select...</option>
               <option value="vacant">Vacant</option>
@@ -230,20 +249,29 @@ export default function BookNowForm() {
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Access: Agent/Homeowner or Lockbox?</label>
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              Access: Agent/Homeowner or Lockbox?
+            </label>
             <select
               value={data.accessType}
               onChange={(e) => update({ accessType: e.target.value })}
               className="w-full px-4 py-3 rounded-lg border border-white/20 bg-white/5 text-white focus:outline-none focus:ring-2 focus:ring-brand appearance-none bg-no-repeat bg-[length:20px] bg-[right_0.75rem_center] pr-10"
-              style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E\")" }}
+              style={{
+                backgroundImage:
+                  "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E\")",
+              }}
             >
               <option value="">Select...</option>
-              <option value="agent">Agent or homeowner will grant access</option>
+              <option value="agent">
+                Agent or homeowner will grant access
+              </option>
               <option value="lockbox">Lockbox</option>
             </select>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Lockbox code (optional)</label>
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              Lockbox code (optional)
+            </label>
             <input
               type="text"
               value={data.lockboxCode}
@@ -260,7 +288,8 @@ export default function BookNowForm() {
         <div className="space-y-4">
           <h3 className="text-lg sm:text-xl font-bold text-white">Services</h3>
           <p className="text-gray-400 text-sm sm:text-base">
-            Choose one or more services for this shoot. We’ll confirm pricing and details after you submit.
+            Choose one or more services for this shoot. We’ll confirm pricing
+            and details after you submit.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
             {SERVICES.map((s) => (
@@ -278,12 +307,16 @@ export default function BookNowForm() {
                   onChange={() => toggleService(s.slug)}
                   className="mt-1 h-4 w-4 rounded border-white/30 bg-white/5 text-brand focus:ring-brand"
                 />
-                <span className="text-white font-medium text-sm sm:text-base">{s.title}</span>
+                <span className="text-white font-medium text-sm sm:text-base">
+                  {s.title}
+                </span>
               </label>
             ))}
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Other requests or notes (optional)</label>
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              Other requests or notes (optional)
+            </label>
             <textarea
               value={data.additionalServices}
               onChange={(e) => update({ additionalServices: e.target.value })}
@@ -298,13 +331,18 @@ export default function BookNowForm() {
       {/* Step 3: Scheduling */}
       {step === 3 && (
         <div className="space-y-4">
-          <h3 className="text-lg sm:text-xl font-bold text-white">Scheduling</h3>
+          <h3 className="text-lg sm:text-xl font-bold text-white">
+            Scheduling
+          </h3>
           <p className="text-gray-400 text-sm sm:text-base">
-            Share your preferred date and time. We’ll confirm availability and send a calendar invite.
+            Share your preferred date and time. We’ll confirm availability and
+            send a calendar invite.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-1">Preferred date</label>
+              <label className="block text-sm font-medium text-gray-300 mb-1">
+                Preferred date
+              </label>
               <input
                 type="date"
                 value={data.preferredDate}
@@ -313,12 +351,17 @@ export default function BookNowForm() {
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-300 mb-1">Preferred time</label>
+              <label className="block text-sm font-medium text-gray-300 mb-1">
+                Preferred time
+              </label>
               <select
                 value={data.preferredTime}
                 onChange={(e) => update({ preferredTime: e.target.value })}
                 className="w-full px-4 py-3 rounded-lg border border-white/20 bg-white/5 text-white focus:outline-none focus:ring-2 focus:ring-brand appearance-none bg-no-repeat bg-[length:20px] bg-[right_0.75rem_center] pr-10"
-                style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E\")" }}
+                style={{
+                  backgroundImage:
+                    "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%239ca3af'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'%3E%3C/path%3E%3C/svg%3E\")",
+                }}
               >
                 <option value="">Select...</option>
                 <option value="morning">Morning (8–12)</option>
@@ -329,7 +372,9 @@ export default function BookNowForm() {
             </div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Shoot notes (optional)</label>
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              Shoot notes (optional)
+            </label>
             <textarea
               value={data.shootNotes}
               onChange={(e) => update({ shootNotes: e.target.value })}
@@ -349,7 +394,9 @@ export default function BookNowForm() {
             How we’ll reach you to confirm the booking and send deliverables.
           </p>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Full name *</label>
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              Full name *
+            </label>
             <input
               type="text"
               value={data.fullName}
@@ -360,7 +407,9 @@ export default function BookNowForm() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Email *</label>
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              Email *
+            </label>
             <input
               type="email"
               value={data.email}
@@ -371,7 +420,9 @@ export default function BookNowForm() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Phone *</label>
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              Phone *
+            </label>
             <input
               type="tel"
               value={data.phone}
@@ -382,7 +433,9 @@ export default function BookNowForm() {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-300 mb-1">Company or brokerage (optional)</label>
+            <label className="block text-sm font-medium text-gray-300 mb-1">
+              Company or brokerage (optional)
+            </label>
             <input
               type="text"
               value={data.company}
@@ -405,25 +458,46 @@ export default function BookNowForm() {
             <p className="text-gray-300">
               <span className="text-gray-500">Address:</span>{" "}
               {data.useManualAddress
-                ? [data.street, data.city, data.state, data.zip].filter(Boolean).join(", ") || "—"
+                ? [data.street, data.city, data.state, data.zip]
+                    .filter(Boolean)
+                    .join(", ") || "—"
                 : data.addressSearch || "—"}
             </p>
-            {data.squareFootage && <p className="text-gray-300"><span className="text-gray-500">Sq ft:</span> {data.squareFootage}</p>}
-            {data.occupancy && <p className="text-gray-300"><span className="text-gray-500">Occupancy:</span> {data.occupancy}</p>}
-            {data.accessType && <p className="text-gray-300"><span className="text-gray-500">Access:</span> {data.accessType}</p>}
+            {data.squareFootage && (
+              <p className="text-gray-300">
+                <span className="text-gray-500">Sq ft:</span>{" "}
+                {data.squareFootage}
+              </p>
+            )}
+            {data.occupancy && (
+              <p className="text-gray-300">
+                <span className="text-gray-500">Occupancy:</span>{" "}
+                {data.occupancy}
+              </p>
+            )}
+            {data.accessType && (
+              <p className="text-gray-300">
+                <span className="text-gray-500">Access:</span> {data.accessType}
+              </p>
+            )}
             <p className="text-gray-300">
               <span className="text-gray-500">Services:</span>{" "}
               {data.selectedServices.length
-                ? data.selectedServices.map((slug) => SERVICES.find((s) => s.slug === slug)?.title).join(", ")
+                ? data.selectedServices
+                    .map((slug) => SERVICES.find((s) => s.slug === slug)?.title)
+                    .join(", ")
                 : "—"}
             </p>
             {(data.preferredDate || data.preferredTime) && (
               <p className="text-gray-300">
-                <span className="text-gray-500">Preferred:</span> {data.preferredDate || ""} {data.preferredTime ? `· ${data.preferredTime}` : ""}
+                <span className="text-gray-500">Preferred:</span>{" "}
+                {data.preferredDate || ""}{" "}
+                {data.preferredTime ? `· ${data.preferredTime}` : ""}
               </p>
             )}
             <p className="text-gray-300">
-              <span className="text-gray-500">Contact:</span> {data.fullName}, {data.email}, {data.phone}
+              <span className="text-gray-500">Contact:</span> {data.fullName},{" "}
+              {data.email}, {data.phone}
             </p>
           </div>
         </div>

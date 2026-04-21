@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AppChrome } from "./components/AppChrome";
+import Preloader from "./components/Preloader";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +35,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden min-h-screen bg-black`}
       >
-        <AppChrome>{children}</AppChrome>
+        <Preloader minLoadTime={2500}>
+          <AppChrome>{children}</AppChrome>
+        </Preloader>
       </body>
     </html>
   );
