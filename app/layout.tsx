@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { AppChrome } from "./components/AppChrome";
 import Preloader from "./components/Preloader";
+import { futuraHeavy } from "./font";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -33,7 +34,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="overflow-x-hidden">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased overflow-x-hidden min-h-screen bg-black`}
+        className={`${geistSans.variable} ${geistMono.variable} ${futuraHeavy.variable} antialiased overflow-x-hidden min-h-screen bg-black`}
       >
         <Preloader minLoadTime={2500}>
           <AppChrome>{children}</AppChrome>
