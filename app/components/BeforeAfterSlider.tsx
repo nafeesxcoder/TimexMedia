@@ -22,32 +22,74 @@ export default function BeforeAfterSlider({
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  const handleMouseDown = () => {
-    setIsDragging(true);
+  const updateSliderPosition = (clientX: number) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    // Calculate position relative to container
+    let x = clientX - rect.left;
+    // Clamp to container bounds
+    x = Math.max(0, Math.min(x, rect.width));
+    const percent = (x / rect.width) * 100;
+    setSliderPosition(Math.min(100, Math.max(0, percent)));
   };
 
-  const handleMouseUp = () => {
+  const handleMouseDown = (e: React.MouseEvent | React.TouchEvent) => {
+    setIsDragging(true);
+    if ("clientX" in e) {
+      updateSliderPosition(e.clientX);
+    } else {
+      e.preventDefault();
+      updateSliderPosition(e.touches[0].clientX);
+    }
+  };
+
+  const handleMove = (e: MouseEvent | TouchEvent) => {
+    if (!isDragging) return;
+    e.preventDefault();
+    let clientX: number;
+    if ("touches" in e) {
+      clientX = e.touches[0].clientX;
+    } else {
+      clientX = e.clientX;
+    }
+    updateSliderPosition(clientX);
+  };
+
+  const handleDragEnd = () => {
     setIsDragging(false);
   };
 
-  const handleMouseMove = (e: MouseEvent | React.MouseEvent) => {
-    if (!isDragging || !containerRef.current) return;
-
+  // Handle tap/click on container
+  const handleContainerTap = (e: React.MouseEvent | React.TouchEvent) => {
+    if (!containerRef.current) return;
+    let clientX: number;
+    if ("clientX" in e) {
+      clientX = e.clientX;
+    } else {
+      clientX = e.changedTouches[0].clientX;
+    }
     const rect = containerRef.current.getBoundingClientRect();
-    const x = Math.max(0, Math.min(e.clientX - rect.left, rect.width));
+    let x = clientX - rect.left;
+    x = Math.max(0, Math.min(x, rect.width));
     const percent = (x / rect.width) * 100;
     setSliderPosition(Math.min(100, Math.max(0, percent)));
   };
 
   useEffect(() => {
     if (isDragging) {
-      window.addEventListener("mousemove", handleMouseMove as any);
-      window.addEventListener("mouseup", handleMouseUp);
+      window.addEventListener("mousemove", handleMove);
+      window.addEventListener("mouseup", handleDragEnd);
+      window.addEventListener("touchmove", handleMove, { passive: false });
+      window.addEventListener("touchend", handleDragEnd);
+      window.addEventListener("touchcancel", handleDragEnd);
     }
 
     return () => {
-      window.removeEventListener("mousemove", handleMouseMove as any);
-      window.removeEventListener("mouseup", handleMouseUp);
+      window.removeEventListener("mousemove", handleMove);
+      window.removeEventListener("mouseup", handleDragEnd);
+      window.removeEventListener("touchmove", handleMove);
+      window.removeEventListener("touchend", handleDragEnd);
+      window.removeEventListener("touchcancel", handleDragEnd);
     };
   }, [isDragging]);
 
@@ -56,57 +98,82 @@ export default function BeforeAfterSlider({
       initial={{ opacity: 0, scale: 0.95 }}
       animate={{ opacity: 1, scale: 1 }}
       transition={{ duration: 0.6 }}
-      className={`relative ${className}`}
+      className={`relative w-full ${className}`}
     >
       <div
         ref={containerRef}
-        className="relative overflow-hidden rounded-lg cursor-grab active:cursor-grabbing"
+        className="relative overflow-hidden rounded-lg touch-action-none"
         style={{
           aspectRatio: "16/12",
-          minHeight: 300,
+          width: "100%",
+          cursor: "grab",
         }}
-        onMouseMove={handleMouseMove}
+        onMouseDown={handleMouseDown}
+        onTouchStart={handleContainerTap}
+        onClick={handleContainerTap}
       >
-        {/* After Image */}
-        <div className="absolute inset-0 bg-gray-800 z-1">
+        {/* After Image (Full Width) */}
+        <div className="absolute inset-0 w-full h-full">
           <img
             src={afterImage}
             alt={afterLabel}
-            className="w-full h-full object-cover"
+            className="w-full h-full object-cover pointer-events-none"
+            draggable={false}
           />
         </div>
 
-        {/* Before Image */}
+        {/* Before Image (Clipped) */}
         <div
-          className="absolute inset-0 bg-gray-600 z-2"
+          className="absolute inset-0 w-full h-full overflow-hidden"
           style={{
-            clipPath: `inset(0 ${100 - sliderPosition}% 0 0)`,
+            width: `${sliderPosition}%`,
           }}
         >
-          <img
-            src={beforeImage}
-            alt={beforeLabel}
-            className="w-full h-full object-cover"
-          />
+          <div className="absolute inset-0 w-[calc(100%*100/var(--percent,100))] min-w-full">
+            <img
+              src={beforeImage}
+              alt={beforeLabel}
+              className="w-full h-full object-cover pointer-events-none"
+              draggable={false}
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+              }}
+            />
+          </div>
         </div>
 
-        {/* Slider Handle */}
+        {/* Slider Handle - Larger touch area for mobile */}
         <div
-          className="absolute top-0 bottom-0 z-10 cursor-ew-resize"
+          className="absolute top-0 bottom-0 z-10 touch-none"
           style={{
-            left: `calc(${sliderPosition}% - 1px)`,
-            width: "2px",
-            backgroundColor: "white",
-            boxShadow: "0 0 5px rgba(0,0,0,0.3)",
+            left: `calc(${sliderPosition}% - 24px)`,
+            width: "48px",
+            cursor: "ew-resize",
           }}
           onMouseDown={handleMouseDown}
+          onTouchStart={handleMouseDown}
         >
+          {/* Handle Line */}
+          <div
+            className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2"
+            style={{
+              width: "3px",
+              backgroundColor: "white",
+              boxShadow: "0 0 8px rgba(0,0,0,0.5)",
+            }}
+          />
+
+          {/* Handle Button - Larger for mobile */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <div className="w-8 h-8 rounded-full bg-white border-2 border-purple-500 flex items-center justify-center shadow-lg">
-              <svg width="12" height="12" viewBox="0 0 10 10" fill="#7c3aed">
+            <div className="w-12 h-12 sm:w-10 sm:h-10 rounded-full bg-white border-2 border-purple-500 flex items-center justify-center shadow-lg active:scale-95 transition-transform">
+              {/* Left Arrow */}
+              <svg width="16" height="16" viewBox="0 0 10 10" fill="#7c3aed">
                 <path d="M6.5 0L1 5L6.5 10L7.5 9L3 5L7.5 1Z" />
               </svg>
-              <svg width="12" height="12" viewBox="0 0 10 10" fill="#7c3aed">
+              {/* Right Arrow */}
+              <svg width="16" height="16" viewBox="0 0 10 10" fill="#7c3aed">
                 <path d="M3.5 0L9 5L3.5 10L2.5 9L7 5L2.5 1Z" />
               </svg>
             </div>

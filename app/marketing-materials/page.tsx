@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import AnimateOnView from "../components/AnimateOnView";
+import AnimatedButton from "../components/AnimatedButton";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -10,34 +11,34 @@ export const metadata = {
     "Professional photography portfolio, brand resources, and marketing guides for real estate agents.",
 };
 
-// Unique category-based portfolio structure
+// Generate images array from Image1.png to Image30.png
+const generateImageArray = (start: number, end: number) => {
+  const images = [];
+  for (let i = start; i <= end; i++) {
+    images.push(`/Image${i}.png`);
+  }
+  return images;
+};
+
+// All 30 images
+const ALL_IMAGES = generateImageArray(1, 30);
+
+// Split images into 3 categories (10 images each)
 const PORTFOLIO_CATEGORIES = [
   {
     name: "Interior Excellence",
     icon: "🏠",
-    images: [
-      "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=2070&auto=format&fit=crop",
-    ],
+    images: ALL_IMAGES.slice(0, 10),
   },
   {
     name: "Exterior & Aerial",
     icon: "🏡",
-    images: [
-      "https://images.unsplash.com/photo-1600607687644-c7171b42498f?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?q=80&w=2070&auto=format&fit=crop",
-    ],
+    images: ALL_IMAGES.slice(10, 20),
   },
   {
     name: "Luxury Details",
     icon: "✨",
-    images: [
-      "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1600566752355-35792bedcfea?q=80&w=2070&auto=format&fit=crop",
-      "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?q=80&w=2070&auto=format&fit=crop",
-    ],
+    images: ALL_IMAGES.slice(20, 30),
   },
 ];
 
@@ -124,7 +125,7 @@ export default function MarketingMaterialsPage() {
     <div className="min-h-screen overflow-x-hidden w-full max-w-[100vw] text-gray-100">
       <Header />
 
-      {/* Hero Section - Original Design Restored */}
+      {/* Hero Section */}
       <section className="relative h-[40vh] min-h-[280px] sm:min-h-[320px] md:min-h-[380px] max-h-[55dvh] flex items-center justify-center overflow-hidden">
         <AnimateOnView
           animation="blur-in"
@@ -165,12 +166,12 @@ export default function MarketingMaterialsPage() {
       <section className="w-full bg-brand-600 py-3 sm:py-4 overflow-x-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-center text-white text-xl sm:text-2xl md:text-3xl font-bold uppercase tracking-widest">
-            Video Gallery
+            Portfolio Gallery
           </h2>
         </div>
       </section>
 
-      {/* Impact Stats Section - Unique data-driven */}
+      {/* Impact Stats Section */}
       <section className="py-16 md:py-20 px-4 border-y border-white/10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
@@ -194,7 +195,7 @@ export default function MarketingMaterialsPage() {
         </div>
       </section>
 
-      {/* Portfolio Showcase - Category Grid */}
+      {/* Portfolio Showcase - All 30 Images */}
       <section className="py-20 md:py-28 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12 md:mb-16">
@@ -225,19 +226,20 @@ export default function MarketingMaterialsPage() {
                   </h3>
                   <div className="flex-1 h-px bg-gradient-to-r from-brand/50 to-transparent" />
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4 md:gap-6">
                   {category.images.map((img, imgIdx) => (
                     <AnimateOnView
                       key={img}
                       animation="fade-in-up"
-                      delay={`${0.05 + imgIdx * 0.05}s`}
+                      delay={`${0.05 + (imgIdx % 5) * 0.03}s`}
                       className="group relative aspect-[4/3] overflow-hidden rounded-xl cursor-pointer"
                     >
                       <Image
                         src={img}
-                        alt={`${category.name} showcase`}
+                        alt={`${category.name} showcase ${imgIdx + 1}`}
                         fill
                         className="object-cover transition-all duration-700 group-hover:scale-110"
+                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-300" />
                       <div className="absolute bottom-0 left-0 right-0 p-4 transform translate-y-full group-hover:translate-y-0 transition-transform duration-300">
@@ -250,6 +252,14 @@ export default function MarketingMaterialsPage() {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Total Images Counter */}
+          <div className="text-center mt-16 pt-8 border-t border-white/10">
+            <p className="text-gray-400 text-sm">
+              Showing all {ALL_IMAGES.length} premium photographs from our
+              portfolio
+            </p>
           </div>
         </div>
       </section>
@@ -366,7 +376,7 @@ export default function MarketingMaterialsPage() {
         </div>
       </section>
 
-      {/* CTA Section - Bold and Clear */}
+      {/* CTA Section - Fixed with AnimatedButton */}
       <section className="py-20 md:py-28 px-4">
         <div className="max-w-4xl mx-auto text-center">
           <AnimateOnView
@@ -382,23 +392,22 @@ export default function MarketingMaterialsPage() {
               sell properties
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                href="/book-now"
-                className="px-8 py-3 bg-brand hover:bg-brand-600 text-white font-semibold rounded-lg transition-all duration-300 transform hover:scale-105"
-              >
-                Book a Shoot
-              </Link>
-              <Link
-                href="/contact"
-                className="px-8 py-3 border border-white/30 hover:bg-white/10 text-white font-semibold rounded-lg transition-all duration-300"
-              >
-                Contact Us
+              {/* Book a Shoot - Same as home page button */}
+              <AnimatedButton text="Book a Shoot" link="/book-now" />
+
+              {/* Contact Us - Different styling (Outline button) */}
+              <Link href="/contact">
+                <button className="group px-8 py-3.5 bg-transparent border-2 border-white/40 text-white font-semibold rounded-lg hover:bg-white/10 hover:border-white transition-all duration-300">
+                  Contact Us
+                  <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">
+                    →
+                  </span>
+                </button>
               </Link>
             </div>
           </AnimateOnView>
         </div>
       </section>
-
       {/* Footer Contact Strip */}
       <section className="border-t border-white/20 bg-black/20 py-6 sm:py-8 px-4 sm:px-6 lg:px-8 overflow-x-hidden">
         <div className="max-w-7xl mx-auto w-full min-w-0 flex flex-col sm:flex-row sm:items-center sm:justify-center gap-3 sm:gap-6 text-sm sm:text-base text-gray-300">
@@ -437,6 +446,7 @@ export default function MarketingMaterialsPage() {
                 d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
               />
             </svg>
+            <span>(555) 123-4567</span>
           </span>
         </div>
       </section>
