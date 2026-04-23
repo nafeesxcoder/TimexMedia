@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SERVICES } from "./lib/services";
 import BeforeAfterSlider from "./components/BeforeAfterSlider";
+import TestimonialsSection from "./components/TestimonialsSection";
 
 export default function Home() {
   // Typewriter effect states
@@ -286,6 +287,8 @@ export default function Home() {
       </section>
 
       <PortfolioPreview />
+
+      <TestimonialsSection />
 
       {/* CTA Section */}
       <section className="py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-900/20 via-transparent to-purple-900/20">
