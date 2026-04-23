@@ -2,16 +2,20 @@
 
 import { useState } from "react";
 import { SERVICES } from "../lib/services";
+import PropertyTypeStep from "../components/PropertyTypeStep";
 
 const STEPS = [
-  { num: 1, label: "Address" },
-  { num: 2, label: "Services" },
-  { num: 3, label: "Scheduling" },
-  { num: 4, label: "Contact" },
-  { num: 5, label: "Confirm" },
+  { num: 1, label: "Property Type" },
+  { num: 2, label: "Address" },
+  { num: 3, label: "Services" },
+  { num: 4, label: "Scheduling" },
+  { num: 5, label: "Contact" },
+  { num: 6, label: "Confirm" },
 ] as const;
 
 type FormData = {
+  // Property Type
+  propertyType: string;
   // Address
   addressSearch: string;
   useManualAddress: boolean;
@@ -38,6 +42,7 @@ type FormData = {
 };
 
 const initialFormData: FormData = {
+  propertyType: "Single-Family",
   addressSearch: "",
   useManualAddress: false,
   street: "",
@@ -78,7 +83,7 @@ export default function BookNowForm() {
   };
 
   const nextStep = () => {
-    if (step < 5) setStep(step + 1);
+    if (step < 6) setStep(step + 1);
   };
 
   const prevStep = () => {
@@ -88,7 +93,7 @@ export default function BookNowForm() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitted(true);
-    // In production you would send data to an API here
+    console.log("Form Data:", data);
   };
 
   if (submitted) {
@@ -98,7 +103,7 @@ export default function BookNowForm() {
           Request received
         </h3>
         <p className="text-gray-300 text-base sm:text-lg">
-          Thanks for booking with Timex Media. We’ll reach out shortly to
+          Thanks for booking with Timex Media. We'll reach out shortly to
           confirm your shoot and answer any questions.
         </p>
       </div>
@@ -134,8 +139,19 @@ export default function BookNowForm() {
         </div>
       </div>
 
-      {/* Step 1: Address */}
+      {/* Step 1: Property Type */}
       {step === 1 && (
+        <PropertyTypeStep
+          onContinue={(propertyType) => {
+            update({ propertyType });
+            nextStep();
+          }}
+          initialValue={data.propertyType}
+        />
+      )}
+
+      {/* Step 2: Address */}
+      {step === 2 && (
         <div className="space-y-4">
           <h3 className="text-lg sm:text-xl font-bold text-white">Address</h3>
           <p className="text-gray-400 text-sm sm:text-base">
@@ -283,12 +299,12 @@ export default function BookNowForm() {
         </div>
       )}
 
-      {/* Step 2: Services */}
-      {step === 2 && (
+      {/* Step 3: Services */}
+      {step === 3 && (
         <div className="space-y-4">
           <h3 className="text-lg sm:text-xl font-bold text-white">Services</h3>
           <p className="text-gray-400 text-sm sm:text-base">
-            Choose one or more services for this shoot. We’ll confirm pricing
+            Choose one or more services for this shoot. We'll confirm pricing
             and details after you submit.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -328,14 +344,14 @@ export default function BookNowForm() {
         </div>
       )}
 
-      {/* Step 3: Scheduling */}
-      {step === 3 && (
+      {/* Step 4: Scheduling */}
+      {step === 4 && (
         <div className="space-y-4">
           <h3 className="text-lg sm:text-xl font-bold text-white">
             Scheduling
           </h3>
           <p className="text-gray-400 text-sm sm:text-base">
-            Share your preferred date and time. We’ll confirm availability and
+            Share your preferred date and time. We'll confirm availability and
             send a calendar invite.
           </p>
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -386,12 +402,12 @@ export default function BookNowForm() {
         </div>
       )}
 
-      {/* Step 4: Contact */}
-      {step === 4 && (
+      {/* Step 5: Contact */}
+      {step === 5 && (
         <div className="space-y-4">
           <h3 className="text-lg sm:text-xl font-bold text-white">Contact</h3>
           <p className="text-gray-400 text-sm sm:text-base">
-            How we’ll reach you to confirm the booking and send deliverables.
+            How we'll reach you to confirm the booking and send deliverables.
           </p>
           <div>
             <label className="block text-sm font-medium text-gray-300 mb-1">
@@ -447,14 +463,18 @@ export default function BookNowForm() {
         </div>
       )}
 
-      {/* Step 5: Confirm */}
-      {step === 5 && (
+      {/* Step 6: Confirm */}
+      {step === 6 && (
         <div className="space-y-4">
           <h3 className="text-lg sm:text-xl font-bold text-white">Confirm</h3>
           <p className="text-gray-400 text-sm sm:text-base">
             Review your booking details below, then submit to send your request.
           </p>
           <div className="rounded-xl border border-white/20 bg-white/5 p-4 sm:p-6 space-y-3 text-sm sm:text-base">
+            <p className="text-gray-300">
+              <span className="text-gray-500">Property Type:</span>{" "}
+              {data.propertyType}
+            </p>
             <p className="text-gray-300">
               <span className="text-gray-500">Address:</span>{" "}
               {data.useManualAddress
@@ -517,7 +537,7 @@ export default function BookNowForm() {
           )}
         </div>
         <div className="flex gap-3">
-          {step < 5 ? (
+          {step < 6 ? (
             <button
               type="button"
               onClick={nextStep}

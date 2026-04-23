@@ -3,11 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import AnimateOnView from "./AnimateOnView";
-import AnimatedButton from "./AnimatedButton"; // ✅ Import AnimatedButton
+import AnimatedButton from "./AnimatedButton";
 
 const PortfolioPreview = () => {
   // Array of 10 image numbers
-  const imageNumbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+  const imageNumbers = [1, 25, 3, 6, 26, 27, 9, 10, 21, 22];
 
   return (
     <section className="py-16 px-4 sm:px-6 lg:px-8 bg-black/20">
