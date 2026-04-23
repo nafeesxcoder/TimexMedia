@@ -22,64 +22,52 @@ export default function TestimonialsSection() {
   const testimonials = useMemo<Testimonial[]>(
     () => [
       {
-        name: "Sophia Martinez",
-        role: "Luxury Realtor · Compass",
+        name: "Ziprent",
+        role: "Property Management",
         location: "San Francisco, CA",
         rating: 5,
-        headline: "Listings that sell in days, not weeks.",
+        headline: "Listings that rent themselves.",
         quote:
-          "Timex Media turned a $3.4M listing into a cinematic story. The twilight shots and drone pass alone booked us eight showings in the first weekend. Nothing on market compares.",
-        highlights: ["Cinematic Edits", "Twilight Shoot", "4K Drone"],
-        initials: "SM",
+          "Timex Media completely changed how our rentals perform online. The photos, drone work, and walkthrough videos cut our average days-on-market in half and inquiries doubled overnight. Truly a game-changer for our portfolio.",
+        highlights: ["Rental Photography", "Drone Footage", "Walkthrough Video"],
+        initials: "ZR",
         accent: "from-brand via-fuchsia-500 to-pink-500",
       },
       {
-        name: "Daniel Chen",
-        role: "Team Lead · Keller Williams",
+        name: "Nova West",
+        role: "Real Estate Group",
         location: "San Jose, CA",
         rating: 5,
         headline: "24hr turnaround, zero compromises.",
         quote:
-          "I upload Friday afternoon and have gallery-ready photos, a reel, and a 3D tour by Saturday morning. Their consistency is why every agent on my team uses them.",
+          "We upload a shoot in the afternoon and have gallery-ready photos, a branded reel, and a 3D tour ready by the next morning. Their consistency and attention to detail is why every agent on our team uses them.",
         highlights: ["3D Virtual Tour", "Same Day Edit", "Branded Reel"],
-        initials: "DC",
+        initials: "NW",
         accent: "from-violet-500 via-brand to-indigo-500",
       },
       {
-        name: "Priya Natarajan",
-        role: "Founder · Skyline Homes",
+        name: "Mountain Mike's",
+        role: "Pizza · Franchise Marketing",
         location: "Oakland, CA",
         rating: 4.9,
-        headline: "A true creative partner.",
+        headline: "Content that actually drives foot traffic.",
         quote:
-          "They don't just shoot houses – they art-direct them. Every detail, from the staging cues to the music sync on our walkthrough videos, feels intentional and elevated.",
-        highlights: ["Art Direction", "Walkthrough Video", "Color Grade"],
-        initials: "PN",
+          "From sizzle reels to in-store brand shoots, Timex Media delivered assets that made our locations stand out on every platform. Our social engagement jumped significantly after the first campaign launched.",
+        highlights: ["Brand Campaign", "Food Cinematography", "Social Reels"],
+        initials: "MM",
         accent: "from-brand-300 via-brand to-purple-700",
       },
       {
-        name: "Marcus Reed",
-        role: "Broker Associate · Redfin",
+        name: "Calcost",
+        role: "Commercial Services",
         location: "Sacramento, CA",
         rating: 5,
-        headline: "The kind of media buyers remember.",
+        headline: "The kind of media clients remember.",
         quote:
-          "Our average days-on-market dropped by 38% after switching to Timex Media. The aerial work is genuinely gallery quality and buyers tell me the tour is why they booked.",
-        highlights: ["Aerial Drone", "Matterport", "Lifestyle Photos"],
-        initials: "MR",
+          "Timex Media made our company look twice its size. The aerial work and on-site video storytelling are genuinely gallery quality, and our conversion rate on quote requests went up 38% after relaunching with their content.",
+        highlights: ["Aerial Drone", "Corporate Video", "Site Photography"],
+        initials: "CC",
         accent: "from-pink-500 via-brand to-violet-600",
-      },
-      {
-        name: "Jasmine Alvarez",
-        role: "Marketing Director · Nova Realty",
-        location: "Fresno, CA",
-        rating: 4.8,
-        headline: "Marketing assets that make us look bigger than we are.",
-        quote:
-          "We're a boutique brokerage but our listings look like they belong in Architectural Digest. Their team treats every shoot like a brand campaign. Absolute gold.",
-        highlights: ["Brand Campaign", "Social Edits", "Floor Plans"],
-        initials: "JA",
-        accent: "from-brand via-purple-500 to-fuchsia-400",
       },
     ],
     [],
@@ -264,7 +252,7 @@ export default function TestimonialsSection() {
           </div>
 
           {/* Client picker row */}
-          <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+          <div className="mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3">
             {testimonials.map((t, i) => {
               const isActive = i === activeIndex;
               return (
