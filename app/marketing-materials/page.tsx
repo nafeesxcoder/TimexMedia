@@ -24,21 +24,30 @@ const generateImageArray = (start: number, end: number) => {
 const ALL_IMAGES = generateImageArray(1, 30);
 
 // Split images into 3 categories (10 images each)
+// Note: Image1 - Image5 are grouped under "Exterior & Aerial"
 const PORTFOLIO_CATEGORIES = [
   {
     name: "Interior Excellence",
     icon: "🏠",
-    images: ALL_IMAGES.slice(0, 10),
+    images: generateImageArray(6, 15),
   },
   {
     name: "Exterior & Aerial",
     icon: "🏡",
-    images: ALL_IMAGES.slice(10, 20),
+    images: [
+      ...generateImageArray(1, 3),
+      "/IMG_1535.jpg",
+      "/20260318_181347521_iOS.jpg",
+      ...generateImageArray(16, 17),
+      "/IMG_1138.jpg",
+      "/IMG_1159.jpg",
+      "/IMG_1160.jpg",
+    ],
   },
   {
     name: "Luxury Details",
     icon: "✨",
-    images: ALL_IMAGES.slice(20, 30),
+    images: generateImageArray(21, 30),
   },
 ];
 
