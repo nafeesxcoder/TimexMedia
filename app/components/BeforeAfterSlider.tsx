@@ -2,18 +2,17 @@
 
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
+import Image from "next/image";
 
 type BeforeAfterSliderProps = {
-  beforeImage: string;
-  afterImage: string;
+  imageNumber?: number;
   beforeLabel?: string;
   afterLabel?: string;
   className?: string;
 };
 
 export default function BeforeAfterSlider({
-  beforeImage,
-  afterImage,
+  imageNumber = 10,
   beforeLabel = "BEFORE",
   afterLabel = "AFTER",
   className = "",
@@ -25,9 +24,7 @@ export default function BeforeAfterSlider({
   const updateSliderPosition = (clientX: number) => {
     if (!containerRef.current) return;
     const rect = containerRef.current.getBoundingClientRect();
-    // Calculate position relative to container
     let x = clientX - rect.left;
-    // Clamp to container bounds
     x = Math.max(0, Math.min(x, rect.width));
     const percent = (x / rect.width) * 100;
     setSliderPosition(Math.min(100, Math.max(0, percent)));
@@ -59,7 +56,6 @@ export default function BeforeAfterSlider({
     setIsDragging(false);
   };
 
-  // Handle tap/click on container
   const handleContainerTap = (e: React.MouseEvent | React.TouchEvent) => {
     if (!containerRef.current) return;
     let clientX: number;
@@ -104,7 +100,7 @@ export default function BeforeAfterSlider({
         ref={containerRef}
         className="relative overflow-hidden rounded-lg touch-action-none"
         style={{
-          aspectRatio: "16/12",
+          aspectRatio: "16/9",
           width: "100%",
           cursor: "grab",
         }}
@@ -112,35 +108,42 @@ export default function BeforeAfterSlider({
         onTouchStart={handleContainerTap}
         onClick={handleContainerTap}
       >
-        {/* After Image (Full Width) */}
+        {/* AFTER Image - High Quality (Right side - Full width) */}
         <div className="absolute inset-0 w-full h-full">
-          <img
-            src={afterImage}
+          <Image
+            src="/Image10.png"
             alt={afterLabel}
-            className="w-full h-full object-cover pointer-events-none"
+            fill
+            className="object-cover pointer-events-none"
             draggable={false}
+            quality={100}
+            priority
           />
         </div>
 
-        {/* Before Image (Clipped) */}
+        {/* BEFORE Image - Extremely Low Quality (Left side - Clipped) */}
         <div
           className="absolute inset-0 w-full h-full overflow-hidden"
           style={{
             width: `${sliderPosition}%`,
           }}
         >
-          <div className="absolute inset-0 w-[calc(100%*100/var(--percent,100))] min-w-full">
-            <img
-              src={beforeImage}
+          <div className="relative w-full h-full">
+            <Image
+              src="/Image10.png"
               alt={beforeLabel}
-              className="w-full h-full object-cover pointer-events-none"
+              fill
+              className="object-cover pointer-events-none"
               draggable={false}
+              quality={1}
               style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
+                filter:
+                  "blur(25px) brightness(0.2) contrast(0.3) saturate(0) grayscale(1)",
+                opacity: 0.8,
               }}
             />
+            {/* Dark overlay for worse quality feel */}
+            <div className="absolute inset-0 bg-gradient-to-br from-black/60 to-transparent pointer-events-none"></div>
           </div>
         </div>
 
@@ -165,15 +168,15 @@ export default function BeforeAfterSlider({
             }}
           />
 
-          {/* Handle Button - Larger for mobile */}
+          {/* Handle Button */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-            <div className="w-12 h-12 sm:w-10 sm:h-10 rounded-full bg-white border-2 border-purple-500 flex items-center justify-center shadow-lg active:scale-95 transition-transform">
+            <div className="w-12 h-12 sm:w-10 sm:h-10 rounded-full bg-white border-2 border-brand flex items-center justify-center shadow-lg active:scale-95 transition-transform">
               {/* Left Arrow */}
-              <svg width="16" height="16" viewBox="0 0 10 10" fill="#7c3aed">
+              <svg width="16" height="16" viewBox="0 0 10 10" fill="#e3342f">
                 <path d="M6.5 0L1 5L6.5 10L7.5 9L3 5L7.5 1Z" />
               </svg>
               {/* Right Arrow */}
-              <svg width="16" height="16" viewBox="0 0 10 10" fill="#7c3aed">
+              <svg width="16" height="16" viewBox="0 0 10 10" fill="#0891b2">
                 <path d="M3.5 0L9 5L3.5 10L2.5 9L7 5L2.5 1Z" />
               </svg>
             </div>
@@ -182,12 +185,12 @@ export default function BeforeAfterSlider({
 
         {/* Labels */}
         <div className="absolute top-4 left-4 z-5 pointer-events-none">
-          <span className="bg-black/70 text-white px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold backdrop-blur-sm">
+          <span className="bg-red-600/90 text-white px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold backdrop-blur-sm">
             {beforeLabel}
           </span>
         </div>
         <div className="absolute top-4 right-4 z-5 pointer-events-none">
-          <span className="bg-black/70 text-white px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold backdrop-blur-sm">
+          <span className="bg-brand/90 text-white px-3 py-1.5 rounded-md text-xs sm:text-sm font-semibold backdrop-blur-sm">
             {afterLabel}
           </span>
         </div>
