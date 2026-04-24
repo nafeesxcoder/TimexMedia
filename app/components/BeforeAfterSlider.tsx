@@ -5,14 +5,12 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 type BeforeAfterSliderProps = {
-  imageNumber?: number;
   beforeLabel?: string;
   afterLabel?: string;
   className?: string;
 };
 
 export default function BeforeAfterSlider({
-  imageNumber = 10,
   beforeLabel = "BEFORE",
   afterLabel = "AFTER",
   className = "",

@@ -159,6 +159,7 @@ export default function Home() {
           </div>
         </div>
       </section>
+
       {/* Content Section */}
       <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 overflow-x-hidden">
         <div className="max-w-7xl mx-auto w-full">
@@ -217,12 +218,7 @@ export default function Home() {
             </AnimateOnView>
           </div>
           <div className="max-w-5xl mx-auto">
-            <BeforeAfterSlider
-              beforeImage="https://framerusercontent.com/images/4PGq4w5rfdX9aFwoglHjuLkEbw.png?width=1600&height=1200"
-              afterImage="https://framerusercontent.com/images/gtCK1FJ1DO1s0BqfXUkLNUsb39E.png?width=1600&height=1200"
-              beforeLabel="BEFORE"
-              afterLabel="AFTER"
-            />
+            <BeforeAfterSlider beforeLabel="BEFORE" afterLabel="AFTER" />
           </div>
         </div>
       </section>
