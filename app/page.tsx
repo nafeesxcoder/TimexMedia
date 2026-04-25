@@ -56,68 +56,75 @@ export default function Home() {
     <div className="min-h-screen overflow-x-hidden w-full max-w-[100vw] text-gray-100">
       <Header />
 
-      {/* Hero Section with Typewriter - Reduced Height */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[110vh] flex items-center justify-center overflow-hidden -mt-16">
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=2073&auto=format&fit=crop"
+            src="/herosection.png"
             alt="Modern home interior"
             fill
-            className="object-cover scale-105"
+            className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70"></div>
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-900/20 via-transparent to-purple-900/20"></div>
+          <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/80"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-900/30 via-transparent to-pink-900/30"></div>
         </div>
 
         {/* Content */}
         <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
           <AnimateOnView animation="fade-in-up" delay="0.1s">
-            <div className="inline-block mb-4 px-5 py-2 bg-white/10 backdrop-blur-sm border-l-4 border-purple-500">
-              <span className="text-white text-sm font-medium tracking-wider uppercase">
-                Premium Real Estate Media
+            <div className="inline-block mb-4 px-5 py-2 bg-white/10 backdrop-blur-sm border-l-4 border-purple-500 rounded-r-full">
+              <span className="text-white text-sm font-medium tracking-wider uppercase animate-pulse">
+                ⚡ Limited Time Offer: 20% Off First Shoot
               </span>
             </div>
           </AnimateOnView>
 
           <AnimateOnView animation="fade-in-up" delay="0.2s">
             <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold mb-4 tracking-tight">
-              <span className="bg-gradient-to-r from-white via-purple-300 to-white bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-[gradient_3s_linear_infinite]">
                 Timex Media
               </span>
             </h1>
           </AnimateOnView>
 
           <AnimateOnView animation="fade-in-up" delay="0.3s">
-            <div className="text-base sm:text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-4 leading-relaxed">
-              <span className="font-medium">Professional </span>
+            <div className="text-base sm:text-lg md:text-2xl text-gray-200 max-w-3xl mx-auto mb-4 leading-relaxed">
+              <span className="font-bold">Capturing Dreams, </span>
               <span className="relative">
-                <span className="text-purple-400 font-bold border-r-2 border-purple-400 animate-pulse">
+                <span className="text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text font-bold">
                   {text}
                 </span>
-                <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-purple-400 to-pink-500"></span>
+                <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-purple-400 to-pink-500 animate-pulse"></span>
               </span>
             </div>
 
-            <p className="text-base sm:text-lg md:text-xl text-gray-200 max-w-3xl mx-auto mb-6 leading-relaxed">
-              Transforming properties into{" "}
-              <span className="text-purple-400 font-semibold border-b border-purple-400">
-                visual masterpieces
-              </span>{" "}
-              that stand out and sell faster.
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-100 max-w-3xl mx-auto mb-8 leading-relaxed font-medium">
+              <span className="text-purple-300"></span> Where Every Pixel Tells
+              a Story <span className="text-pink-300"></span>
+            </p>
+
+            <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto mb-8">
+              Professional photography & videography that makes your property
+              <span className="text-purple-400 font-semibold">
+                {" "}
+                irresistible to buyers
+              </span>
             </p>
           </AnimateOnView>
 
           <AnimateOnView animation="fade-in-up" delay="0.4s">
             <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
-              <AnimatedButton text="Book Your Shoot →" link="/book-now" />
+              <AnimatedButton text="🎬 Book Your Shoot →" link="/book-now" />
 
               <Link href="#services">
-                <button className="group px-8 py-3.5 bg-transparent border-2 border-white/30 text-white font-semibold rounded-lg hover:bg-white/10 hover:border-white/50 transition-all duration-300">
-                  Explore Services
-                  <span className="inline-block ml-2 group-hover:translate-y-1 transition-transform">
-                    ↓
+                <button className="group px-8 py-3.5 bg-white/10 backdrop-blur-md border border-purple-500/50 text-white font-semibold rounded-lg hover:bg-purple-600/30 hover:border-purple-400 transition-all duration-300">
+                  <span className="inline-block mr-2 group-hover:rotate-12 transition-transform">
+                    🎥
+                  </span>
+                  View Our Work
+                  <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">
+                    →
                   </span>
                 </button>
               </Link>
@@ -125,40 +132,68 @@ export default function Home() {
           </AnimateOnView>
 
           <AnimateOnView animation="fade-in-up" delay="0.5s">
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-12 pt-6 border-t border-white/10">
-              <div className="hover:scale-105 transition-transform duration-300">
-                <p className="text-3xl sm:text-4xl font-bold text-white">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-2 pt-2 border-t-0">
+              <div className="group hover:scale-105 transition-all duration-300 cursor-pointer">
+                <p className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                   500+
                 </p>
-                <p className="text-sm text-gray-300 mt-1">Properties Shot</p>
+                <p className="text-sm text-gray-300 mt-1 group-hover:text-purple-300 transition">
+                  Properties Shot
+                </p>
               </div>
-              <div className="hover:scale-105 transition-transform duration-300">
-                <p className="text-3xl sm:text-4xl font-bold text-white">50+</p>
-                <p className="text-sm text-gray-300 mt-1">Happy Agents</p>
+              <div className="group hover:scale-105 transition-all duration-300 cursor-pointer">
+                <p className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  50+
+                </p>
+                <p className="text-sm text-gray-300 mt-1 group-hover:text-purple-300 transition">
+                  Happy Agents
+                </p>
               </div>
-              <div className="hover:scale-105 transition-transform duration-300">
-                <p className="text-3xl sm:text-4xl font-bold text-white">
+              <div className="group hover:scale-105 transition-all duration-300 cursor-pointer">
+                <p className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                   24hr
                 </p>
-                <p className="text-sm text-gray-300 mt-1">Turnaround</p>
+                <p className="text-sm text-gray-300 mt-1 group-hover:text-purple-300 transition">
+                  Fast Turnaround
+                </p>
               </div>
-              <div className="hover:scale-105 transition-transform duration-300">
-                <p className="text-3xl sm:text-4xl font-bold text-white">
+              <div className="group hover:scale-105 transition-all duration-300 cursor-pointer">
+                <p className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                   4.9★
                 </p>
-                <p className="text-sm text-gray-300 mt-1">Client Rating</p>
+                <p className="text-sm text-gray-300 mt-1 group-hover:text-purple-300 transition">
+                  Client Rating
+                </p>
               </div>
             </div>
           </AnimateOnView>
         </div>
 
-        {/* Scroll Indicator */}
+        {/* Animated Scroll Indicator */}
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce">
-          <div className="w-5 h-8 rounded-full border border-white/40 flex justify-center">
-            <div className="w-1 h-1.5 bg-white/60 rounded-full mt-2 animate-pulse"></div>
+          <div className="w-6 h-10 rounded-full border-2 border-purple-400/60 flex justify-center">
+            <div className="w-1.5 h-2 bg-purple-400 rounded-full mt-2 animate-ping"></div>
           </div>
         </div>
       </section>
+
+      {/* Add this style tag in your component or layout */}
+      <style jsx>{`
+        @keyframes gradient {
+          0% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+          100% {
+            background-position: 0% 50%;
+          }
+        }
+        .animate-\[gradient_3s_linear_infinite\] {
+          animation: gradient 3s linear infinite;
+        }
+      `}</style>
 
       {/* Content Section */}
       <section className="py-12 sm:py-16 md:py-24 px-4 sm:px-6 lg:px-8 overflow-x-hidden">
