@@ -1,3 +1,6 @@
+"use client";
+
+import Link from "next/link";
 import AnimateOnView from "./AnimateOnView";
 import {
   FaFacebookF,
@@ -6,9 +9,16 @@ import {
   FaXTwitter,
 } from "react-icons/fa6";
 import { FaWhatsapp } from "react-icons/fa6";
-import { MdEmail, MdLocationOn, MdAccessTime } from "react-icons/md";
+import { MdEmail, MdLocationOn } from "react-icons/md";
 
 export default function Footer() {
+  // Exact address
+  const address = "3661 West Shield Ave, Fresno, CA 93722";
+
+  // Google Maps embed URL
+  const googleMapsEmbedUrl =
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3197.8!2d-119.805!3d36.735!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80945f0f5b5b5b5b%3A0x5b5b5b5b5b5b5b5b!2s3661%20West%20Shield%20Ave%2C%20Fresno%2C%20CA%2093722!5e0!3m2!1sen!2sus!4v1234567890123!5m2!1sen!2sus";
+
   return (
     <footer className="w-full overflow-x-hidden max-w-[100vw] bg-black">
       {/* Top Brand Bar */}
@@ -17,7 +27,13 @@ export default function Footer() {
           <AnimateOnView animation="fade-in-down">
             <h2 className="text-center text-white text-base sm:text-lg md:text-xl font-semibold mb-3">
               Included in{" "}
-              <span className="text-brand">All Service Packages</span>
+              <Link
+                href="/pricing"
+                className="text-brand hover:text-brand/80 transition-colors hover:underline cursor-pointer"
+                aria-label="View all service packages"
+              >
+                All Service Packages
+              </Link>
             </h2>
           </AnimateOnView>
           <div className="flex flex-wrap justify-center items-center gap-3 sm:gap-5">
@@ -42,10 +58,10 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Main Footer - 3 Columns */}
+      {/* Main Footer - 4 Columns with Map */}
       <div className="py-8 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
             {/* Turnaround */}
             <AnimateOnView animation="fade-in-left" delay="0.1s">
               <div>
@@ -67,24 +83,24 @@ export default function Footer() {
                 <h3 className="font-semibold text-white text-base mb-2">
                   📞 Contact
                 </h3>
-                <div className="space-y-1.5">
+                <div className="space-y-2">
                   <a
                     href="tel:+15595053443"
-                    className="flex items-center gap-2 text-gray-400 hover:text-brand text-sm transition-colors"
+                    className="flex items-center gap-2 text-gray-400 hover:text-brand text-sm transition-colors group"
                   >
-                    <FaWhatsapp className="w-3.5 h-3.5" />
+                    <FaWhatsapp className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
                     +1 (559) 505-3443
                   </a>
                   <a
                     href="mailto:team@timexsolutioninc.com"
-                    className="flex items-center gap-2 text-gray-400 hover:text-brand text-sm transition-colors"
+                    className="flex items-center gap-2 text-gray-400 hover:text-brand text-sm transition-colors group"
                   >
-                    <MdEmail className="w-3.5 h-3.5" />
+                    <MdEmail className="w-3.5 h-3.5 group-hover:scale-110 transition-transform" />
                     team@timexsolutioninc.com
                   </a>
                   <div className="flex items-start gap-2 text-gray-400 text-sm">
                     <MdLocationOn className="w-3.5 h-3.5 mt-0.5" />
-                    <span>3661 West Shield Ave, Fresno, CA 93722</span>
+                    <span>{address}</span>
                   </div>
                 </div>
               </div>
@@ -107,6 +123,38 @@ export default function Footer() {
                     Privacy
                   </button>
                 </div>
+              </div>
+            </AnimateOnView>
+
+            {/* Google Map - Exact Address */}
+            <AnimateOnView animation="fade-in-right" delay="0.25s">
+              <div>
+                <h3 className="font-semibold text-white text-base mb-2">
+                  🗺️ Find Us
+                </h3>
+                <div className="rounded-lg overflow-hidden border border-white/20 h-[160px] w-full">
+                  <iframe
+                    title="Timex Media Location Map"
+                    src={googleMapsEmbedUrl}
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="w-full h-full"
+                  />
+                </div>
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+                    address,
+                  )}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-brand text-xs mt-2 inline-block hover:underline"
+                >
+                  Open in Google Maps →
+                </a>
               </div>
             </AnimateOnView>
           </div>
@@ -173,7 +221,15 @@ export default function Footer() {
               © {new Date().getFullYear()} Timex Media. All rights reserved.
             </p>
             <p>
-              Powered by <span className="text-brand">Timex Solution Inc</span>
+              Powered by{" "}
+              <a
+                href="https://timexsolutioninc.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-brand hover:text-brand/80 hover:underline transition-colors"
+              >
+                Timex Solution Inc
+              </a>
             </p>
           </div>
         </div>
