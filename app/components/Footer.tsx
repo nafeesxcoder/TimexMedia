@@ -200,7 +200,7 @@ export default function Footer() {
             </AnimateOnView>
             <AnimateOnView animation="pop-in" delay="0.32s">
               <a
-                href="https://www.instagram.com/timexsolutioninc?igsh=MWZodjU5cnZ4OGw0YQ=="
+                href="https://www.instagram.com/timexmedia.co?igsh=MXE2bjh3bDMzN3VvYQ=="
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-500 hover:text-[#e4405f] transition-all hover:scale-110 inline-block"

@@ -61,48 +61,6 @@ export default function AboutPage() {
       <StatsSection />
       <ProcessSection />
 
-      {/* Contact strip - same as before */}
-      <section className="border-t border-white/10 bg-black/30 py-6 sm:py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center sm:justify-center gap-3 sm:gap-6 text-sm sm:text-base text-gray-300">
-          <span className="flex items-center gap-2">
-            <svg
-              className="w-4 h-4 text-brand-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-              />
-            </svg>
-            <a
-              href="mailto:support@timex.media"
-              className="text-white hover:text-brand-300 underline underline-offset-2"
-            >
-              support@timex.media
-            </a>
-          </span>
-          <span className="flex items-center gap-2">
-            <svg
-              className="w-4 h-4 text-brand-400"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
-              />
-            </svg>
-          </span>
-        </div>
-      </section>
-
       <Footer />
     </div>
   );

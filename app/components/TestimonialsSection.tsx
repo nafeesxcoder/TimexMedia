@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { useEffect, useMemo, useState } from "react";
 import { HiOutlineSparkles } from "react-icons/hi2";
 import { FiCamera, FiChevronLeft, FiChevronRight } from "react-icons/fi";
+import Image from "next/image";
 import AnimateOnView from "./AnimateOnView";
 
 type Testimonial = {
@@ -16,6 +17,7 @@ type Testimonial = {
   highlights: string[];
   initials: string;
   accent: string;
+  logoSrc: string;
 };
 
 export default function TestimonialsSection() {
@@ -29,9 +31,14 @@ export default function TestimonialsSection() {
         headline: "Listings that rent themselves.",
         quote:
           "Timex Media completely changed how our rentals perform online. The photos, drone work, and walkthrough videos cut our average days-on-market in half and inquiries doubled overnight. Truly a game-changer for our portfolio.",
-        highlights: ["Rental Photography", "Drone Footage", "Walkthrough Video"],
+        highlights: [
+          "Rental Photography",
+          "Drone Footage",
+          "Walkthrough Video",
+        ],
         initials: "ZR",
         accent: "from-brand via-fuchsia-500 to-pink-500",
+        logoSrc: "/ziprent.jpg",
       },
       {
         name: "Nova West",
@@ -44,6 +51,7 @@ export default function TestimonialsSection() {
         highlights: ["3D Virtual Tour", "Same Day Edit", "Branded Reel"],
         initials: "NW",
         accent: "from-violet-500 via-brand to-indigo-500",
+        logoSrc: "/nova_west.png",
       },
       {
         name: "Mountain Mike's",
@@ -56,6 +64,7 @@ export default function TestimonialsSection() {
         highlights: ["Brand Campaign", "Food Cinematography", "Social Reels"],
         initials: "MM",
         accent: "from-brand-300 via-brand to-purple-700",
+        logoSrc: "/home-job.png",
       },
       {
         name: "Calcost",
@@ -68,6 +77,7 @@ export default function TestimonialsSection() {
         highlights: ["Aerial Drone", "Corporate Video", "Site Photography"],
         initials: "CC",
         accent: "from-pink-500 via-brand to-violet-600",
+        logoSrc: "/calcoast.png",
       },
     ],
     [],
@@ -125,8 +135,8 @@ export default function TestimonialsSection() {
 
           <AnimateOnView animation="fade-in-up" delay="0.2s">
             <p className="mt-3 text-gray-300 max-w-2xl mx-auto text-base sm:text-lg">
-              From first showing to sold – hear how Timex Media helps top
-              agents win listings and move homes faster.
+              From first showing to sold – hear how Timex Media helps top agents
+              win listings and move homes faster.
             </p>
           </AnimateOnView>
         </div>
@@ -151,16 +161,22 @@ export default function TestimonialsSection() {
                   transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   className="grid gap-10 md:grid-cols-[auto_1fr] items-start"
                 >
-                  {/* Left column: avatar + rating */}
+                  {/* Left column: logo + rating */}
                   <div className="flex md:flex-col items-center md:items-start gap-5">
                     <div className="relative">
                       <div
                         className={`absolute inset-0 rounded-2xl bg-gradient-to-br ${active.accent} blur-xl opacity-70`}
                       />
                       <div
-                        className={`relative h-24 w-24 sm:h-28 sm:w-28 rounded-2xl bg-gradient-to-br ${active.accent} flex items-center justify-center text-2xl sm:text-3xl font-bold text-white ring-1 ring-white/20`}
+                        className={`relative h-24 w-24 sm:h-28 sm:w-28 rounded-2xl bg-gradient-to-br ${active.accent} flex items-center justify-center p-3 ring-1 ring-white/20 overflow-hidden`}
                       >
-                        {active.initials}
+                        <Image
+                          src={active.logoSrc}
+                          alt={`${active.name} logo`}
+                          width={80}
+                          height={80}
+                          className="w-full h-full object-contain rounded-xl"
+                        />
                       </div>
                     </div>
 
@@ -169,14 +185,13 @@ export default function TestimonialsSection() {
                         {Array.from({ length: 5 }).map((_, i) => {
                           const filled = i < Math.floor(active.rating);
                           const half =
-                            !filled && i < Math.ceil(active.rating) &&
+                            !filled &&
+                            i < Math.ceil(active.rating) &&
                             active.rating % 1 !== 0;
                           return (
                             <RatingBar
                               key={i}
-                              state={
-                                filled ? "full" : half ? "half" : "empty"
-                              }
+                              state={filled ? "full" : half ? "half" : "empty"}
                             />
                           );
                         })}
@@ -251,7 +266,7 @@ export default function TestimonialsSection() {
             </div>
           </div>
 
-          {/* Client picker row */}
+          {/* Client picker row with logos */}
           <div className="mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3">
             {testimonials.map((t, i) => {
               const isActive = i === activeIndex;
@@ -268,9 +283,15 @@ export default function TestimonialsSection() {
                 >
                   <div className="flex items-center gap-3">
                     <div
-                      className={`h-9 w-9 shrink-0 rounded-lg bg-gradient-to-br ${t.accent} flex items-center justify-center text-xs font-bold text-white ring-1 ring-white/15`}
+                      className={`h-10 w-10 shrink-0 rounded-lg bg-gradient-to-br ${t.accent} flex items-center justify-center p-1.5 ring-1 ring-white/15 overflow-hidden`}
                     >
-                      {t.initials}
+                      <Image
+                        src={t.logoSrc}
+                        alt={`${t.name} logo`}
+                        width={32}
+                        height={32}
+                        className="w-full h-full object-contain rounded"
+                      />
                     </div>
                     <div className="min-w-0">
                       <p

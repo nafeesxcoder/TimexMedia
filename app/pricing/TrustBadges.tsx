@@ -150,9 +150,9 @@ export default function TrustBadges() {
           <div className="mt-16 pt-8 text-center">
             <div className="inline-flex flex-wrap justify-center gap-6 md:gap-10">
               {[
-                { label: "Happy Clients", value: "500+" },
-                { label: "Properties", value: "2,000+" },
-                { label: "Experience", value: "5+ Years" },
+                { label: "Happy Clients", value: " 8+" },
+                { label: "Properties", value: "72+" },
+                { label: "Experience", value: "3+ Years" },
                 { label: "Satisfaction", value: "100%" },
               ].map((stat, i) => (
                 <div key={stat.label} className="text-center">
