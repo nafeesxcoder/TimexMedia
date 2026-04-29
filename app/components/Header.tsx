@@ -4,12 +4,20 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { SERVICES } from "../lib/services";
+
+// ✅ नई SERVICES लिस्ट - आपकी जरूरत के अनुसार
+const SERVICES = [
+  { title: "AI Videos 🤖", slug: "ai-videos" },
+  { title: "Walkthrough Video 🎥", slug: "walkthrough-video" },
+  { title: "Photos 📸", slug: "photos" },
+  { title: "Talking Head Videos 🗣️", slug: "talking-head-videos" },
+  { title: "Business Videos 🏢", slug: "business-videos" },
+];
 
 const navItems = [
   { label: "Home", href: "/" },
   { label: "Book Now", href: "/book-now" },
-  { label: "Pricing", href: "/pricing" }, // Fixed: Changed from "#" to "/pricing"
+  { label: "Pricing", href: "/pricing" },
   { label: "Marketing Materials", href: "/marketing-materials" },
   { label: "Blog", href: "/blog" },
   { label: "About", href: "/about" },
@@ -98,7 +106,7 @@ export default function Header() {
               </span>
             </Link>
 
-            {/* Desktop Navigation - Same sequence as original */}
+            {/* Desktop Navigation */}
             <nav className="hidden lg:flex items-center gap-6">
               <Link
                 href="/"
@@ -107,7 +115,7 @@ export default function Header() {
                 Home
               </Link>
 
-              {/* SERVICES DROPDOWN */}
+              {/* SERVICES DROPDOWN - Updated with new services */}
               <div
                 className="relative"
                 ref={servicesRef}
@@ -135,12 +143,12 @@ export default function Header() {
 
                 {servicesDropdownOpen && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2">
-                    <div className="bg-white rounded-xl shadow-2xl py-2 min-w-[220px]">
+                    <div className="bg-white rounded-xl shadow-2xl py-2 min-w-[240px]">
                       {SERVICES.map((s) => (
                         <Link
                           key={s.slug}
                           href={`/services/${s.slug}`}
-                          className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+                          className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-100 transition-colors"
                         >
                           {s.title}
                         </Link>
@@ -150,7 +158,7 @@ export default function Header() {
                 )}
               </div>
 
-              {/* Other nav items in original order */}
+              {/* Other nav items */}
               {navItems
                 .filter((item) => item.label !== "Home")
                 .map((item) => (
@@ -269,7 +277,7 @@ export default function Header() {
                   </div>
                 </motion.div>
 
-                {/* Navigation Links - Same sequence as original */}
+                {/* Navigation Links */}
                 <div className="space-y-2">
                   {/* Home */}
                   <motion.div
@@ -327,7 +335,7 @@ export default function Header() {
                     </Link>
                   </motion.div>
 
-                  {/* Pricing - Now Working */}
+                  {/* Pricing */}
                   <motion.div
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -441,7 +449,7 @@ export default function Header() {
                     </Link>
                   </motion.div>
 
-                  {/* Services Accordion */}
+                  {/* Services Accordion - Updated with new services */}
                   <motion.div
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}

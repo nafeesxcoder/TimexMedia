@@ -64,6 +64,23 @@ export default function TestimonialsSection() {
         highlights: ["Brand Campaign", "Food Cinematography", "Social Reels"],
         initials: "MM",
         accent: "from-brand-300 via-brand to-purple-700",
+        logoSrc: "/Mountain.png",
+      },
+      {
+        name: "HomeJob",
+        role: "Home Services Platform",
+        location: "Los Angeles, CA",
+        rating: 5,
+        headline: "Professional visuals that build trust instantly.",
+        quote:
+          "The quality of photography and video content from Timex Media elevated our platform's credibility overnight. Listings with their media package get 3x more inquiries and close 40% faster.",
+        highlights: [
+          "Interior Photography",
+          "360° Virtual Tours",
+          "Social Proof Reels",
+        ],
+        initials: "HJ",
+        accent: "from-emerald-500 via-teal-500 to-brand",
         logoSrc: "/home-job.png",
       },
       {
@@ -267,7 +284,7 @@ export default function TestimonialsSection() {
           </div>
 
           {/* Client picker row with logos */}
-          <div className="mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3">
+          <div className="mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 gap-3">
             {testimonials.map((t, i) => {
               const isActive = i === activeIndex;
               return (
@@ -302,7 +319,7 @@ export default function TestimonialsSection() {
                         {t.name}
                       </p>
                       <p className="text-[11px] text-gray-400 truncate">
-                        {t.location}
+                        {t.location.split(",")[0]}
                       </p>
                     </div>
                   </div>
