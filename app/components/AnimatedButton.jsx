@@ -22,9 +22,9 @@ export default function AnimatedButton({
         whileTap={{ scale: 0.95 }}
         className="relative inline-block rounded-full p-[2px] overflow-hidden w-full lg:w-auto"
       >
-        {/* 🔥 SHARP SPINNING BORDER (VISIBLE ROTATION) */}
+        {/* 🔥 SLOW SPINNING BORDER */}
         <span
-          className="absolute inset-0 rounded-full animate-[spin_2.5s_linear_infinite]"
+          className="absolute inset-0 rounded-full animate-[spin_6s_linear_infinite]"
           style={{
             background:
               "conic-gradient(from 0deg, #a855f7, #ffffff, #7c3aed, #a855f7)",
@@ -34,7 +34,7 @@ export default function AnimatedButton({
         {/* Inner Layer */}
         <span className="absolute inset-[2px] rounded-full bg-black/70 backdrop-blur-md" />
 
-        {/* Button Content (same purple theme) */}
+        {/* Button Content */}
         <span className="relative z-10 flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-purple-600 to-purple-500 px-6 py-3 text-white font-medium hover:from-purple-500 hover:to-purple-400 transition-all duration-300">
           {text}
           <motion.span whileHover={{ x: 6 }}>→</motion.span>

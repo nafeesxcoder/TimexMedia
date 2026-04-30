@@ -9,11 +9,12 @@ import PortfolioPreview from "./components/PortfolioPreview";
 import Image from "next/image";
 import Link from "next/link";
 import { SERVICES } from "./lib/services";
+import { FEATURED_VIDEOS } from "./lib/videos"; // ✅ अब ठीक काम करेगा
+
 import BeforeAfterSlider from "./components/BeforeAfterSlider";
 import TestimonialsSection from "./components/TestimonialsSection";
 
 export default function Home() {
-  // Typewriter effect states
   const [text, setText] = useState("");
   const [index, setIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -57,7 +58,6 @@ export default function Home() {
       <Header />
 
       <section className="relative min-h-[110vh] flex items-center justify-center overflow-hidden -mt-16">
-        {/* Background Image */}
         <div className="absolute inset-0">
           <Image
             src="/herosection.png"
@@ -70,7 +70,6 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-r from-purple-900/30 via-transparent to-pink-900/30"></div>
         </div>
 
-        {/* Content */}
         <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
           <AnimateOnView animation="fade-in-up" delay="0.1s">
             <div className="inline-block mb-4 px-5 py-2 bg-white/10 backdrop-blur-sm border-l-4 border-purple-500 rounded-r-full">
@@ -100,8 +99,7 @@ export default function Home() {
             </div>
 
             <p className="text-lg sm:text-xl md:text-2xl text-gray-100 max-w-3xl mx-auto mb-8 leading-relaxed font-medium">
-              <span className="text-purple-300"></span> Where Every Pixel Tells
-              a Story <span className="text-pink-300"></span>
+              Where Every Pixel Tells a Story
             </p>
 
             <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto mb-8">
@@ -116,7 +114,6 @@ export default function Home() {
           <AnimateOnView animation="fade-in-up" delay="0.4s">
             <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
               <AnimatedButton text="🎬 Book Your Shoot →" link="/book-now" />
-
               <Link href="#services">
                 <button className="group px-8 py-3.5 bg-white/10 backdrop-blur-md border border-purple-500/50 text-white font-semibold rounded-lg hover:bg-purple-600/30 hover:border-purple-400 transition-all duration-300">
                   <span className="inline-block mr-2 group-hover:rotate-12 transition-transform">
@@ -169,7 +166,6 @@ export default function Home() {
           </AnimateOnView>
         </div>
 
-        {/* Animated Scroll Indicator */}
         <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce">
           <div className="w-6 h-10 rounded-full border-2 border-purple-400/60 flex justify-center">
             <div className="w-1.5 h-2 bg-purple-400 rounded-full mt-2 animate-ping"></div>
@@ -177,7 +173,6 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Add this style tag in your component or layout */}
       <style jsx>{`
         @keyframes gradient {
           0% {
@@ -314,6 +309,76 @@ export default function Home() {
           >
             <AnimatedButton text="Explore all services" link="/services" />
           </AnimateOnView>
+        </div>
+      </section>
+
+      {/* Featured Videos Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-white/5">
+        <div className="max-w-7xl mx-auto">
+          <AnimateOnView animation="fade-in-up">
+            <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-4">
+              Featured Videos
+            </h2>
+            <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
+              Check out our latest video productions
+            </p>
+          </AnimateOnView>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {FEATURED_VIDEOS.map((video, i) => (
+              <AnimateOnView
+                key={video.id}
+                animation="fade-in-up"
+                delay={`${0.05 * i}s`}
+              >
+                <div className="group relative overflow-hidden rounded-xl border border-white/10 bg-black/40 hover:border-purple-500/50 transition-all duration-300 hover:scale-[1.02]">
+                  <div className="relative aspect-video">
+                    <Image
+                      src={video.thumbnail}
+                      alt={video.title}
+                      fill
+                      className="object-cover group-hover:scale-110 transition-transform duration-500"
+                    />
+                    <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                      <div className="w-14 h-14 rounded-full bg-purple-600 flex items-center justify-center">
+                        <svg
+                          className="w-6 h-6 text-white ml-1"
+                          fill="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path d="M8 5v14l11-7z" />
+                        </svg>
+                      </div>
+                    </div>
+                    <div className="absolute bottom-2 right-2 px-2 py-1 rounded bg-black/70 text-white text-xs">
+                      {video.duration}
+                    </div>
+                  </div>
+                  <div className="p-4">
+                    <span className="text-xs text-purple-400">
+                      {video.category}
+                    </span>
+                    <h3 className="font-semibold text-white mt-1">
+                      {video.title}
+                    </h3>
+                    <p className="text-gray-400 text-sm mt-1 line-clamp-2">
+                      {video.description}
+                    </p>
+                  </div>
+                </div>
+              </AnimateOnView>
+            ))}
+          </div>
+
+          <div className="text-center mt-12">
+            <Link
+              href="/videos"
+              className="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-purple-500 text-purple-400 hover:bg-purple-500/10 transition-all duration-300"
+            >
+              View All Videos
+              <span className="group-hover:translate-x-1 transition">→</span>
+            </Link>
+          </div>
         </div>
       </section>
 
