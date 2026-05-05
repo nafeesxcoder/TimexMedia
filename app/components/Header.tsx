@@ -4,14 +4,20 @@ import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 
-// ✅ नई SERVICES लिस्ट - आपकी जरूरत के अनुसार
+// ✅ पहले वाली 10 सर्विसेज - ड्रॉपडाउन के लिए
 const SERVICES = [
-  { title: "AI Videos 🤖", slug: "ai-videos" },
-  { title: "Walkthrough Video 🎥", slug: "walkthrough-video" },
-  { title: "Photos 📸", slug: "photos" },
-  { title: "Talking Head Videos 🗣️", slug: "talking-head-videos" },
-  { title: "Business Videos 🏢", slug: "business-videos" },
+  { title: "Listing Photography", slug: "listing-photography" },
+  { title: "Listing Videos", slug: "listing-videos" },
+  { title: "Social Media Content", slug: "social-media-content" },
+  { title: "3D Virtual Tour", slug: "3d-virtual-tour" },
+  { title: "2D Floor Plans", slug: "2d-floor-plans" },
+  { title: "Virtual Staging", slug: "virtual-staging" },
+  { title: "Headshots", slug: "headshots" },
+  { title: "Branding Session", slug: "branding-session" },
+  { title: "Viral Video Editing", slug: "viral-video-editing" },
+  { title: "Social Media Management", slug: "social-media-management" },
 ];
 
 const navItems = [
@@ -79,31 +85,20 @@ export default function Header() {
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
           <div className="flex items-center justify-between h-20">
-            {/* Logo */}
+            {/* Logo with Image - Fixed: No background, proper size, no constraints */}
             <Link
               href="/"
               className="flex items-center gap-3 group relative z-50"
             >
-              <div className="relative">
-                <div className="w-10 h-10 bg-gradient-to-br from-white/20 to-white/5 flex items-center justify-center rounded-xl backdrop-blur-sm border border-white/20">
-                  <svg
-                    className="w-6 h-6 text-white"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M3 12l2-2 7-7 7 7 2 2M5 10v10a1 1 0 001 1h3m10-11v10a1 1 0 01-1 1h-3"
-                    />
-                  </svg>
-                </div>
-              </div>
-              <span className="text-xl font-bold bg-gradient-to-r from-white to-white/70 bg-clip-text text-transparent hidden sm:block">
-                timex.media
-              </span>
+              {/* Removed wrapper divs with backgrounds and constraints */}
+              <Image
+                src="/Logo.png"
+                alt="Timex Media Logo"
+                width={160}
+                height={90}
+                className="object-contain brightness-0 invert"
+                priority
+              />
             </Link>
 
             {/* Desktop Navigation */}
@@ -115,7 +110,7 @@ export default function Header() {
                 Home
               </Link>
 
-              {/* SERVICES DROPDOWN - Updated with new services */}
+              {/* SERVICES DROPDOWN */}
               <div
                 className="relative"
                 ref={servicesRef}
@@ -143,7 +138,7 @@ export default function Header() {
 
                 {servicesDropdownOpen && (
                   <div className="absolute top-full left-1/2 -translate-x-1/2 pt-2">
-                    <div className="bg-white rounded-xl shadow-2xl py-2 min-w-[240px]">
+                    <div className="bg-white rounded-xl shadow-2xl py-2 min-w-[220px] max-h-[400px] overflow-y-auto">
                       {SERVICES.map((s) => (
                         <Link
                           key={s.slug}
@@ -245,36 +240,22 @@ export default function Header() {
 
               {/* Menu Content */}
               <div className="px-6 pb-8">
-                {/* Logo in Menu */}
+                {/* Logo in Menu with Image - Also fixed to be clean */}
                 <motion.div
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, delay: 0.1 }}
                   className="flex items-center gap-3 mb-10 pb-6 border-b border-white/10"
                 >
-                  <div className="w-12 h-12 bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl flex items-center justify-center border border-white/10">
-                    <svg
-                      className="w-6 h-6 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M3 12l2-2 7-7 7 7 2 2M5 10v10a1 1 0 001 1h3m10-11v10a1 1 0 01-1 1h-3"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="text-white font-semibold text-lg">
-                      timex.media
-                    </p>
-                    <p className="text-white/40 text-xs">
-                      Premium Media Services
-                    </p>
-                  </div>
+                  {/* Removed background wrapper */}
+                  <Image
+                    src="/Logo.png"
+                    alt="Timex Media Logo"
+                    width={100}
+                    height={80}
+                    className="object-contain brightness-0 invert"
+                    priority
+                  />
                 </motion.div>
 
                 {/* Navigation Links */}
@@ -449,7 +430,7 @@ export default function Header() {
                     </Link>
                   </motion.div>
 
-                  {/* Services Accordion - Updated with new services */}
+                  {/* Services Accordion */}
                   <motion.div
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -497,7 +478,7 @@ export default function Header() {
                               key={service.slug}
                               initial={{ opacity: 0, x: -20 }}
                               animate={{ opacity: 1, x: 0 }}
-                              transition={{ delay: idx * 0.05 }}
+                              transition={{ delay: idx * 0.02 }}
                               whileHover={{ x: 8 }}
                             >
                               <Link

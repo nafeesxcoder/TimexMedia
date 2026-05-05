@@ -9,7 +9,7 @@ import PortfolioPreview from "./components/PortfolioPreview";
 import Image from "next/image";
 import Link from "next/link";
 import { SERVICES } from "./lib/services";
-import { FEATURED_VIDEOS } from "./lib/videos"; // ✅ अब ठीक काम करेगा
+import { FEATURED_VIDEOS } from "./lib/videos";
 
 import BeforeAfterSlider from "./components/BeforeAfterSlider";
 import TestimonialsSection from "./components/TestimonialsSection";
@@ -317,7 +317,7 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <AnimateOnView animation="fade-in-up">
             <h2 className="text-3xl sm:text-4xl font-bold text-white text-center mb-4">
-              Featured Videos
+              Videos
             </h2>
             <p className="text-gray-400 text-center mb-12 max-w-2xl mx-auto">
               Check out our latest video productions
@@ -332,26 +332,19 @@ export default function Home() {
                 delay={`${0.05 * i}s`}
               >
                 <div className="group relative overflow-hidden rounded-xl border border-white/10 bg-black/40 hover:border-purple-500/50 transition-all duration-300 hover:scale-[1.02]">
-                  <div className="relative aspect-video">
-                    <Image
-                      src={video.thumbnail}
-                      alt={video.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-black/50 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
-                      <div className="w-14 h-14 rounded-full bg-purple-600 flex items-center justify-center">
-                        <svg
-                          className="w-6 h-6 text-white ml-1"
-                          fill="currentColor"
-                          viewBox="0 0 24 24"
-                        >
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
-                      </div>
-                    </div>
-                    <div className="absolute bottom-2 right-2 px-2 py-1 rounded bg-black/70 text-white text-xs">
-                      {video.duration}
+                  {/* Video Thumbnail Placeholder - Without Image */}
+                  <div className="relative aspect-video bg-gradient-to-br from-gray-900 to-black flex items-center justify-center">
+                    <div className="text-center">
+                      <svg
+                        className="w-12 h-12 text-gray-600 mx-auto mb-2"
+                        fill="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path d="M8 5v14l11-7z" />
+                      </svg>
+                      <p className="text-gray-600 text-sm">
+                        Preview coming soon
+                      </p>
                     </div>
                   </div>
                   <div className="p-4">
@@ -364,21 +357,23 @@ export default function Home() {
                     <p className="text-gray-400 text-sm mt-1 line-clamp-2">
                       {video.description}
                     </p>
+                    {/* Learn More Button - लिंक सही पेज पर जाएगा */}
+                    <Link
+                      href={`/videos/${video.slug}`}
+                      className="inline-flex items-center gap-2 mt-3 text-sm text-purple-400 hover:text-purple-300 transition-colors group/learn"
+                    >
+                      Learn More
+                      <span className="group-hover/learn:translate-x-1 transition-transform">
+                        →
+                      </span>
+                    </Link>
                   </div>
                 </div>
               </AnimateOnView>
             ))}
           </div>
 
-          <div className="text-center mt-12">
-            <Link
-              href="/videos"
-              className="inline-flex items-center gap-2 px-8 py-3 rounded-full border border-purple-500 text-purple-400 hover:bg-purple-500/10 transition-all duration-300"
-            >
-              View All Videos
-              <span className="group-hover:translate-x-1 transition">→</span>
-            </Link>
-          </div>
+          {/* View All Videos button removed */}
         </div>
       </section>
 
