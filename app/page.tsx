@@ -10,6 +10,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { SERVICES } from "./lib/services";
 import { FEATURED_VIDEOS } from "./lib/videos";
+import SocialPosts from "./components/SocialPosts";
 
 import BeforeAfterSlider from "./components/BeforeAfterSlider";
 import TestimonialsSection from "./components/TestimonialsSection";
@@ -376,6 +377,7 @@ export default function Home() {
           {/* View All Videos button removed */}
         </div>
       </section>
+      <SocialPosts />
 
       <PortfolioPreview />
 
