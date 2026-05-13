@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 
-// ✅ पहले वाली 10 सर्विसेज - ड्रॉपडाउन के लिए
 const SERVICES = [
   { title: "Listing Photography", slug: "listing-photography" },
   { title: "Listing Videos", slug: "listing-videos" },

@@ -358,7 +358,7 @@ export default function Home() {
                     <p className="text-gray-400 text-sm mt-1 line-clamp-2">
                       {video.description}
                     </p>
-                    {/* Learn More Button - लिंक सही पेज पर जाएगा */}
+                    {/* Learn More Button  */}
                     <Link
                       href={`/videos/${video.slug}`}
                       className="inline-flex items-center gap-2 mt-3 text-sm text-purple-400 hover:text-purple-300 transition-colors group/learn"
