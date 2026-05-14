@@ -29,11 +29,11 @@ export default function Preloader({
   const lastPopTime = useRef(0);
 
   const images = [
-    "Image1.png",
-    "Image2.png",
-    "Image3.png",
-    "Image4.png",
-    "Image5.png",
+    "webpage1.png",
+    "webpage2.png",
+    "webpage3.png",
+    "webpage4.png",
+    "webpage5.png",
   ];
 
   useEffect(() => {
