@@ -1,0 +1,7 @@
+{
+  "greetings": ["👋 Namaste! Welcome to Timex Media!"],
+  "farewells": ["Have a great day! 👋"],
+  "fallback": "Thanks for reaching out to Timex Media! How can I help you today?",
+  "leadCapture": "Please share your name and email for a custom quote.",
+  "booking": "Please share your name, email, address, and preferred date to book."
+}

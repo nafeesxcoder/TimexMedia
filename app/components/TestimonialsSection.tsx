@@ -102,22 +102,57 @@ export default function TestimonialsSection() {
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [progressWidth, setProgressWidth] = useState(0);
   const active = testimonials[activeIndex];
 
+  // Auto-slide with smooth progress
   useEffect(() => {
     if (paused) return;
-    const id = window.setInterval(() => {
-      setActiveIndex((prev) => (prev + 1) % testimonials.length);
-    }, 6000);
-    return () => window.clearInterval(id);
-  }, [paused, testimonials.length]);
+    
+    let startTime: number;
+    let animationFrame: number;
+    let timeoutId: NodeJS.Timeout;
+    
+    const animateProgress = () => {
+      setProgressWidth(0);
+      startTime = Date.now();
+      
+      const updateProgress = () => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min((elapsed / 6000) * 100, 100);
+        setProgressWidth(progress);
+        
+        if (progress < 100) {
+          animationFrame = requestAnimationFrame(updateProgress);
+        }
+      };
+      
+      updateProgress();
+      
+      timeoutId = setTimeout(() => {
+        setActiveIndex((prev) => (prev + 1) % testimonials.length);
+      }, 6000);
+    };
+    
+    animateProgress();
+    
+    return () => {
+      if (timeoutId) clearTimeout(timeoutId);
+      if (animationFrame) cancelAnimationFrame(animationFrame);
+    };
+  }, [activeIndex, paused, testimonials.length]);
 
-  const goPrev = () =>
+  const goPrev = () => {
     setActiveIndex(
       (prev) => (prev - 1 + testimonials.length) % testimonials.length,
     );
-  const goNext = () =>
+    setProgressWidth(0);
+  };
+  
+  const goNext = () => {
     setActiveIndex((prev) => (prev + 1) % testimonials.length);
+    setProgressWidth(0);
+  };
 
   return (
     <section
@@ -126,7 +161,7 @@ export default function TestimonialsSection() {
     >
       {/* Ambient glow */}
       <div className="pointer-events-none absolute inset-0 -z-10">
-        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[42rem] h-[42rem] rounded-full bg-brand/20 blur-[160px]" />
+        <div className="absolute -top-24 left-1/2 -translate-x-1/2 w-[42rem] h-[42rem] rounded-full bg-purple-600/20 blur-[160px]" />
         <div className="absolute bottom-0 right-0 w-[26rem] h-[26rem] rounded-full bg-fuchsia-500/10 blur-[140px]" />
       </div>
 
@@ -134,9 +169,9 @@ export default function TestimonialsSection() {
         {/* Header */}
         <div className="text-center mb-14">
           <AnimateOnView animation="fade-in-down">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-brand/40 bg-brand/10 backdrop-blur-sm">
-              <HiOutlineSparkles className="text-brand-300" />
-              <span className="text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase text-brand-200">
+            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-purple-500/40 bg-purple-500/10 backdrop-blur-sm">
+              <HiOutlineSparkles className="text-purple-300" />
+              <span className="text-xs sm:text-sm font-semibold tracking-[0.25em] uppercase text-purple-200">
                 Client Love
               </span>
             </div>
@@ -144,7 +179,7 @@ export default function TestimonialsSection() {
 
           <AnimateOnView animation="fade-in-up" delay="0.1s">
             <h2 className="mt-5 text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight">
-              <span className="bg-gradient-to-r from-white via-brand-200 to-white bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-white via-purple-200 to-white bg-clip-text text-transparent">
                 Real Agents. Real Results.
               </span>
             </h2>
@@ -164,17 +199,18 @@ export default function TestimonialsSection() {
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
         >
-          <div className="relative rounded-3xl p-[1.5px] bg-gradient-to-br from-brand/70 via-white/10 to-fuchsia-500/50 shadow-[0_20px_80px_-20px_rgba(146,52,235,0.45)]">
+          {/* Purple shadow border */}
+          <div className="relative rounded-3xl p-[2px] bg-gradient-to-br from-purple-500/70 via-white/20 to-fuchsia-500/50 shadow-[0_20px_80px_-20px_rgba(146,52,235,0.6)]">
             <div className="relative rounded-3xl bg-gradient-to-br from-[#120726]/95 via-[#0b0418]/95 to-black/95 backdrop-blur-xl p-8 sm:p-12 overflow-hidden">
               {/* Decorative camera glyph */}
-              <FiCamera className="absolute -top-6 -right-6 text-[10rem] text-brand/5" />
+              <FiCamera className="absolute -top-6 -right-6 text-[10rem] text-purple-500/10" />
 
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeIndex}
-                  initial={{ opacity: 0, y: 24, filter: "blur(6px)" }}
-                  animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-                  exit={{ opacity: 0, y: -24, filter: "blur(6px)" }}
+                  initial={{ opacity: 0, y: 24 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -24 }}
                   transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   className="grid gap-10 md:grid-cols-[auto_1fr] items-start"
                 >
@@ -212,7 +248,7 @@ export default function TestimonialsSection() {
                             />
                           );
                         })}
-                        <span className="ml-2 text-sm font-semibold text-brand-200">
+                        <span className="ml-2 text-sm font-semibold text-purple-300">
                           {active.rating.toFixed(1)}
                         </span>
                       </div>
@@ -224,7 +260,7 @@ export default function TestimonialsSection() {
 
                   {/* Right column: quote */}
                   <div>
-                    <span className="block text-6xl sm:text-7xl leading-none font-serif text-brand/60 mb-2">
+                    <span className="block text-6xl sm:text-7xl leading-none font-serif text-purple-500/60 mb-2">
                       &ldquo;
                     </span>
 
@@ -240,7 +276,7 @@ export default function TestimonialsSection() {
                       {active.highlights.map((chip) => (
                         <span
                           key={chip}
-                          className="px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-brand/30 text-brand-100 hover:bg-brand/20 transition"
+                          className="px-3 py-1 rounded-full text-xs font-medium bg-white/5 border border-purple-500/30 text-purple-200 hover:bg-purple-500/20 transition"
                         >
                           {chip}
                         </span>
@@ -253,7 +289,7 @@ export default function TestimonialsSection() {
                           {active.name}
                         </p>
                         <p className="text-sm text-gray-400">{active.role}</p>
-                        <p className="text-xs text-brand-300 mt-0.5">
+                        <p className="text-xs text-purple-400 mt-0.5">
                           {active.location}
                         </p>
                       </div>
@@ -263,7 +299,7 @@ export default function TestimonialsSection() {
                           type="button"
                           aria-label="Previous testimonial"
                           onClick={goPrev}
-                          className="h-10 w-10 rounded-full border border-white/15 bg-white/5 text-white hover:bg-brand/20 hover:border-brand/60 transition flex items-center justify-center"
+                          className="h-10 w-10 rounded-full border border-white/15 bg-white/5 text-white hover:bg-purple-500/20 hover:border-purple-500/60 transition flex items-center justify-center"
                         >
                           <FiChevronLeft />
                         </button>
@@ -271,7 +307,7 @@ export default function TestimonialsSection() {
                           type="button"
                           aria-label="Next testimonial"
                           onClick={goNext}
-                          className="h-10 w-10 rounded-full border border-brand/60 bg-brand/30 text-white hover:bg-brand/50 transition flex items-center justify-center"
+                          className="h-10 w-10 rounded-full border border-purple-500/60 bg-purple-500/30 text-white hover:bg-purple-500/50 transition flex items-center justify-center"
                         >
                           <FiChevronRight />
                         </button>
@@ -283,6 +319,15 @@ export default function TestimonialsSection() {
             </div>
           </div>
 
+          {/* Progress bar at bottom */}
+          <div className="absolute -bottom-4 left-4 right-4 h-1 rounded-full bg-white/10 overflow-hidden">
+            <motion.div
+              className="h-full rounded-full bg-gradient-to-r from-purple-500 via-fuchsia-400 to-purple-500"
+              animate={{ width: `${progressWidth}%` }}
+              transition={{ duration: 0.1, ease: "linear" }}
+            />
+          </div>
+
           {/* Client picker row with logos */}
           <div className="mt-8 grid grid-cols-2 sm:grid-cols-2 md:grid-cols-5 gap-3">
             {testimonials.map((t, i) => {
@@ -291,11 +336,15 @@ export default function TestimonialsSection() {
                 <button
                   key={t.name}
                   type="button"
-                  onClick={() => setActiveIndex(i)}
+                  onClick={() => {
+                    setActiveIndex(i);
+                    setProgressWidth(0);
+                    setPaused(false);
+                  }}
                   className={`group relative text-left rounded-xl p-3 border transition-all duration-300 ${
                     isActive
-                      ? "border-brand/60 bg-gradient-to-br from-brand/25 to-transparent shadow-[0_8px_30px_-10px_rgba(146,52,235,0.5)]"
-                      : "border-white/10 bg-white/[0.03] hover:border-brand/30 hover:bg-white/[0.06]"
+                      ? "border-purple-500/60 bg-gradient-to-br from-purple-500/25 to-transparent shadow-[0_8px_30px_-10px_rgba(146,52,235,0.5)]"
+                      : "border-white/10 bg-white/[0.03] hover:border-purple-500/30 hover:bg-white/[0.06]"
                   }`}
                 >
                   <div className="flex items-center gap-3">
@@ -324,15 +373,9 @@ export default function TestimonialsSection() {
                     </div>
                   </div>
 
-                  {/* Progress indicator on active */}
-                  {isActive && !paused && (
-                    <motion.span
-                      key={`bar-${activeIndex}`}
-                      initial={{ width: 0 }}
-                      animate={{ width: "100%" }}
-                      transition={{ duration: 6, ease: "linear" }}
-                      className="absolute left-3 right-3 bottom-1.5 h-0.5 rounded-full bg-gradient-to-r from-brand via-fuchsia-400 to-brand-300"
-                    />
+                  {/* Active indicator dot */}
+                  {isActive && (
+                    <div className="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-purple-500 animate-pulse" />
                   )}
                 </button>
               );
@@ -348,7 +391,7 @@ function RatingBar({ state }: { state: "full" | "half" | "empty" }) {
   return (
     <span className="relative inline-block h-2.5 w-6 rounded-full bg-white/10 overflow-hidden">
       <span
-        className={`absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-brand to-fuchsia-400 ${
+        className={`absolute inset-y-0 left-0 rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-400 ${
           state === "full" ? "w-full" : state === "half" ? "w-1/2" : "w-0"
         }`}
       />

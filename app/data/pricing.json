@@ -1,0 +1,117 @@
+{
+  "services": {
+    "photography": {
+      "basic": {
+        "name": "Basic Photography",
+        "price": 199,
+        "includes": ["20 high-res photos", "2 bedrooms max", "digital delivery"]
+      },
+      "standard": {
+        "name": "Standard Photography",
+        "price": 299,
+        "includes": [
+          "35 high-res photos",
+          "4 bedrooms max",
+          "floor plan",
+          "digital delivery"
+        ]
+      },
+      "premium": {
+        "name": "Premium Photography",
+        "price": 449,
+        "includes": [
+          "50+ high-res photos",
+          "unlimited rooms",
+          "digital+USB",
+          "floor plan",
+          "virtual staging (5 rooms)"
+        ]
+      }
+    },
+    "videography": {
+      "basic": {
+        "name": "Basic Video",
+        "price": 399,
+        "includes": [
+          "60-second video",
+          "walkthrough style",
+          "basic color grading"
+        ]
+      },
+      "premium": {
+        "name": "Premium Video",
+        "price": 699,
+        "includes": [
+          "2-3 minute video",
+          "drone aerial shots",
+          "cinematic editing",
+          "music license"
+        ]
+      }
+    },
+    "drone": {
+      "basic": {
+        "name": "Basic Aerial",
+        "price": 249,
+        "includes": [
+          "10 aerial photos",
+          "FAA licensed pilot",
+          "property overview"
+        ]
+      },
+      "full": {
+        "name": "Full Property",
+        "price": 449,
+        "includes": [
+          "25+ aerial photos",
+          "2-3 video clips",
+          "property overview"
+        ]
+      }
+    },
+    "threeD_tours": {
+      "standard": {
+        "name": "Matterport Standard",
+        "price": 349,
+        "includes": [
+          "3D virtual tour",
+          "dollhouse view",
+          "floor plan",
+          "6 months hosting"
+        ]
+      },
+      "premium": {
+        "name": "Matterport Premium",
+        "price": 549,
+        "includes": [
+          "4K quality scan",
+          "12 months hosting",
+          "virtual tags (10)",
+          "measure mode"
+        ]
+      }
+    }
+  },
+  "addOns": [
+    {
+      "name": "Twilight Photos",
+      "price": 99,
+      "description": "Stunning sunset exterior shots"
+    },
+    {
+      "name": "Additional Bedroom",
+      "price": 25,
+      "description": "Per extra bedroom beyond package limit"
+    },
+    {
+      "name": "Rush Delivery",
+      "price": 75,
+      "description": "Get photos within 24 hours"
+    },
+    {
+      "name": "Virtual Staging",
+      "price": 49,
+      "description": "Per room, virtually furnish empty rooms"
+    }
+  ]
+}

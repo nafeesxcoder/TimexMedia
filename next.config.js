@@ -1,7 +1,7 @@
-import type { NextConfig } from "next";
-import path from "path";
+/** @type {import('next').NextConfig} */
+const path = require("path");
 
-const nextConfig: NextConfig = {
+const nextConfig = {
   images: {
     remotePatterns: [
       {
@@ -16,10 +16,7 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  // Fix the workspace root warning
-  turbopack: {
-    root: path.join(__dirname),
-  },
+  reactStrictMode: true,
 };
 
-export default nextConfig;
+module.exports = nextConfig;

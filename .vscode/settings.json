@@ -1,0 +1,7 @@
+{
+  "js/ts.validate.enabled": false,
+  "css.validate": false,
+  "tailwindCSS.validate": false,
+  "json.schemaDownload.enable": false,
+  "prettier.enable": false
+}

@@ -1,0 +1,22 @@
+{
+  "faqs": [
+    {
+      "id": 1,
+      "question": "How long does a photoshoot take?",
+      "answer": "Typically 1-2 hours for a standard home.",
+      "category": "services"
+    },
+    {
+      "id": 2,
+      "question": "When do I get the photos?",
+      "answer": "Within 48 hours. Rush delivery available for $75.",
+      "category": "delivery"
+    },
+    {
+      "id": 3,
+      "question": "Are your drone pilots licensed?",
+      "answer": "Yes, all pilots are FAA Part 107 certified.",
+      "category": "drone"
+    }
+  ]
+}

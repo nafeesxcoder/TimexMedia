@@ -1,0 +1,23 @@
+{
+  "company": {
+    "name": "Timex Media",
+    "tagline": "Premier Real Estate Photography & Marketing"
+  },
+  "contact": {
+    "email": "info@timexmedia.com",
+    "phone": "+1 (512) 555-0123"
+  },
+  "hours": {
+    "monday_friday": {
+      "open": "09:00",
+      "close": "18:00"
+    },
+    "saturday": {
+      "open": "10:00",
+      "close": "16:00"
+    }
+  },
+  "serviceArea": {
+    "primary": ["Austin", "Round Rock", "Cedar Park"]
+  }
+}
