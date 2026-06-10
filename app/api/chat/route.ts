@@ -8,7 +8,7 @@ import type { PricingData, BusinessData, FAQData, ResponsesData } from "@/app/da
 const GROQ_API_KEY = process.env.GROQ_API_KEY;
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 
-// Type assertion with proper typing
+
 const pricing = pricingData as unknown as PricingData;
 const business = businessData as unknown as BusinessData;
 const faq = faqData as unknown as FAQData;

@@ -69,8 +69,8 @@ export const metadata: Metadata = {
     ],
     locale: "en_US",
     type: "website",
-    emails: ["info@timexmedia.com"],
-    phoneNumbers: ["+1-XXX-XXX-XXXX"],
+    emails: ["team@timexsolutioninc.com"],
+    phoneNumbers: ["+1 (559) 505-3443"],
   },
 
   twitter: {
@@ -122,6 +122,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="overflow-x-hidden" suppressHydrationWarning>
       <head>
+        {/* Preconnect for performance */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
           rel="preconnect"
@@ -138,6 +139,22 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//www.googletagmanager.com" />
         <link rel="dns-prefetch" href="//www.google-analytics.com" />
 
+        {/* Favicon Icons - Direct from public folder */}
+        <link rel="icon" href="/icon-72x72.png" sizes="72x72" type="image/png" />
+        <link rel="icon" href="/icon-96x96.png" sizes="96x96" type="image/png" />
+        <link rel="icon" href="/icon-128x128.png" sizes="128x128" type="image/png" />
+        <link rel="icon" href="/icon-144x144.png" sizes="144x144" type="image/png" />
+        <link rel="icon" href="/icon-152x152.png" sizes="152x152" type="image/png" />
+        <link rel="icon" href="/icon-192x192.png" sizes="192x192" type="image/png" />
+        <link rel="icon" href="/icon-384x384.png" sizes="384x384" type="image/png" />
+        <link rel="icon" href="/icon-512x512.png" sizes="512x512" type="image/png" />
+        
+        {/* Shortcut icon */}
+        <link rel="shortcut icon" href="/icon-192x192.png" />
+        
+        {/* Apple Touch Icon */}
+        <link rel="apple-touch-icon" href="/icon-152x152.png" />
+
         {/* Structured Data - Organization Schema */}
         <script
           type="application/ld+json"
@@ -153,19 +170,19 @@ export default function RootLayout({
                 "Premier full-service creative agency specializing in real estate photography, videography, aerial drone services, 3D virtual tours, and comprehensive marketing solutions.",
               address: {
                 "@type": "PostalAddress",
-                streetAddress: "Your Street Address",
-                addressLocality: "Your City",
-                addressRegion: "Your State",
-                postalCode: "Your ZIP",
+                streetAddress: "3661 West Shield Ave",
+                addressLocality: "Fresno",
+                addressRegion: "CA",
+                postalCode: "93722",
                 addressCountry: "US",
               },
               geo: {
                 "@type": "GeoCoordinates",
-                latitude: "YOUR_LATITUDE",
-                longitude: "YOUR_LONGITUDE",
+                latitude: "36.7392",
+                longitude: "-119.8048",
               },
-              telephone: "+1-XXX-XXX-XXXX",
-              email: "info@timexmedia.com",
+              telephone: "+1 (559) 505-3443",
+              email: "team@timexsolutioninc.com",
               priceRange: "$$",
               openingHours: "Mo-Fr 09:00-18:00",
               sameAs: [
@@ -226,18 +243,18 @@ export default function RootLayout({
               },
               name: "Timex Media",
               image: defaultImage,
-              telephone: "+1-XXX-XXX-XXXX",
-              email: "info@timexmedia.com",
+              telephone: "+1 (559) 505-3443",
+              email: "team@timexsolutioninc.com",
               address: {
                 "@type": "PostalAddress",
-                streetAddress: "Your Street Address",
-                addressLocality: "Your City",
-                addressRegion: "Your State",
-                postalCode: "Your ZIP",
+                streetAddress: "3661 West Shield Ave",
+                addressLocality: "Fresno",
+                addressRegion: "CA",
+                postalCode: "93722",
                 addressCountry: "US",
               },
               priceRange: "$$",
-              areaServed: "Your Service Area",
+              areaServed: "Austin, Round Rock, Cedar Park",
               availableLanguage: ["English"],
             }),
           }}
@@ -247,8 +264,8 @@ export default function RootLayout({
         <Preloader minLoadTime={2500}>
           {children}
         </Preloader>
-        <WhatsAppFloat />
         <ClientChatBot />
+        <WhatsAppFloat />
       </body>
     </html>
   );
