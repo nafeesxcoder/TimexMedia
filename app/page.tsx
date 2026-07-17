@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AnimateOnView from "./components/AnimateOnView";
 import AnimatedButton from "./components/AnimatedButton";
 import PortfolioPreview from "./components/PortfolioPreview";
+import Image from "next/image";
 import Link from "next/link";
 import { SERVICES } from "./lib/services";
 import { FEATURED_VIDEOS } from "./lib/videos";
@@ -18,10 +19,6 @@ export default function Home() {
   const [text, setText] = useState("");
   const [index, setIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
-  const [showContent, setShowContent] = useState(false);
-
-  const sectionRef = useRef<HTMLElement>(null);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   const words = [
     "Photography",
@@ -57,187 +54,120 @@ export default function Home() {
     return () => clearTimeout(timeout);
   }, [text, isDeleting, index]);
 
-  // Scroll-locked hero video: page can't scroll past hero until video fully scrubs.
-  // Text/buttons only reveal once the video is nearly finished.
-  useEffect(() => {
-    const video = videoRef.current;
-    if (!video) return;
-
-    // Total wheel/touch px needed to scrub the ENTIRE video.
-    // Higher = slower, more scroll needed. Tune this to taste.
-    const SCROLL_DISTANCE = 1400;
-    // Text/button reveal only after this fraction of the video has played
-    const REVEAL_THRESHOLD = 0.85;
-
-    let progress = 0; // 0 = start, 1 = fully scrubbed
-    let rafId: number | null = null;
-    let pendingProgress: number | null = null;
-
-    const applyVideoTime = () => {
-      rafId = null;
-      if (pendingProgress === null) return;
-      const p = pendingProgress;
-      if (video.duration && !Number.isNaN(video.duration)) {
-        video.currentTime = p * video.duration;
-      }
-      setShowContent(p >= REVEAL_THRESHOLD);
-      pendingProgress = null;
-    };
-
-    const scheduleApply = (p: number) => {
-      pendingProgress = p;
-      if (!rafId) rafId = requestAnimationFrame(applyVideoTime);
-    };
-
-    // We only intervene while the page hasn't scrolled past the hero.
-    const atHeroTop = () => window.scrollY <= 0;
-
-    const handleWheel = (e: WheelEvent) => {
-      if (!atHeroTop()) return;
-
-      const scrollingDown = e.deltaY > 0;
-      const scrollingUp = e.deltaY < 0;
-
-      // Video finished + scrolling down -> release, let the page scroll to next section
-      if (progress >= 1 && scrollingDown) return;
-      // Video at start + scrolling up -> nothing to rewind, let default happen
-      if (progress <= 0 && scrollingUp) return;
-
-      // Otherwise we own this scroll: scrub the video instead of moving the page
-      e.preventDefault();
-      progress = Math.min(Math.max(progress + e.deltaY / SCROLL_DISTANCE, 0), 1);
-      scheduleApply(progress);
-    };
-
-    let touchStartY = 0;
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartY = e.touches[0].clientY;
-    };
-    const handleTouchMove = (e: TouchEvent) => {
-      if (!atHeroTop()) return;
-      const currentY = e.touches[0].clientY;
-      const deltaY = touchStartY - currentY; // positive = finger moving up = scroll-down intent
-      touchStartY = currentY;
-
-      const scrollingDown = deltaY > 0;
-      const scrollingUp = deltaY < 0;
-
-      if (progress >= 1 && scrollingDown) return;
-      if (progress <= 0 && scrollingUp) return;
-
-      e.preventDefault();
-      progress = Math.min(
-        Math.max(progress + deltaY / (SCROLL_DISTANCE * 0.6), 0),
-        1,
-      );
-      scheduleApply(progress);
-    };
-
-    const handleLoaded = () => scheduleApply(progress);
-
-    video.addEventListener("loadedmetadata", handleLoaded);
-    window.addEventListener("wheel", handleWheel, { passive: false });
-    window.addEventListener("touchstart", handleTouchStart, { passive: true });
-    window.addEventListener("touchmove", handleTouchMove, { passive: false });
-
-    if (video.readyState >= 1) scheduleApply(progress);
-
-    return () => {
-      video.removeEventListener("loadedmetadata", handleLoaded);
-      window.removeEventListener("wheel", handleWheel);
-      window.removeEventListener("touchstart", handleTouchStart);
-      window.removeEventListener("touchmove", handleTouchMove);
-      if (rafId) cancelAnimationFrame(rafId);
-    };
-  }, []);
-
   return (
     <div className="min-h-screen overflow-x-hidden w-full max-w-[100vw] text-gray-100">
       <Header />
 
-     {/* Scroll-locked video hero — text/buttons reveal only near the end of the video */}
-      <section
-        ref={sectionRef}
-        className="relative h-screen flex items-center justify-center overflow-hidden -mt-16"
-      >
+      <section className="relative min-h-[110vh] flex items-center justify-center overflow-hidden -mt-16">
         <div className="absolute inset-0">
-          <video
-            ref={videoRef}
-            src="/homevideo.mp4"
-            muted
-            playsInline
-            preload="auto"
-            className="w-full h-full object-cover"
+          <Image
+            src="/herosection.png"
+            alt="Modern home interior"
+            fill
+            className="object-cover"
+            priority
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/60 to-black/80"></div>
           <div className="absolute inset-0 bg-gradient-to-r from-purple-900/30 via-transparent to-pink-900/30"></div>
         </div>
 
-        <div
-          className={`relative z-10 text-center px-4 max-w-6xl mx-auto transition-all duration-700 ease-out ${
-            showContent
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-6 pointer-events-none"
-          }`}
-        >
-          <h1 className="mb-5 tracking-tight">
-            <span
-              className={`block text-lg sm:text-2xl md:text-3xl font-light text-purple-200/80 tracking-[0.3em] uppercase mb-2 transition-all duration-700 ${
-                showContent
-                  ? "opacity-100 blur-0 translate-y-0"
-                  : "opacity-0 blur-sm translate-y-3"
-              }`}
-              style={{ transitionDelay: showContent ? "150ms" : "0ms" }}
-            >
-              Welcome to
-            </span>
-            <span
-              className={`block text-3xl sm:text-5xl md:text-6xl lg:text-7xl font-bold bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-[gradient_3s_linear_infinite] transition-all duration-700 ${
-                showContent
-                  ? "opacity-100 blur-0 translate-y-0 scale-100"
-                  : "opacity-0 blur-sm translate-y-4 scale-95"
-              }`}
-              style={{ transitionDelay: showContent ? "350ms" : "0ms" }}
-            >
-              Timex Media
-            </span>
-          </h1>
+        <div className="relative z-10 text-center px-4 max-w-6xl mx-auto">
+          <AnimateOnView animation="fade-in-up" delay="0.1s">
+            <div className="inline-block mb-4 px-5 py-2 bg-white/10 backdrop-blur-sm border-l-4 border-purple-500 rounded-r-full">
+              <span className="text-white text-sm font-medium tracking-wider uppercase animate-pulse">
+                ⚡ Limited Time Offer: 20% Off First Shoot
+              </span>
+            </div>
+          </AnimateOnView>
 
-          <p
-            className={`text-sm sm:text-base md:text-lg text-transparent bg-gradient-to-r from-purple-200 via-white to-pink-200 bg-clip-text font-medium tracking-[0.15em] uppercase mb-10 max-w-xl mx-auto transition-all duration-700 ${
-              showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
-            }`}
-            style={{ transitionDelay: showContent ? "550ms" : "0ms" }}
-          >
-            Real Estate Photography &amp; Video, Reimagined
-          </p>
+          <AnimateOnView animation="fade-in-up" delay="0.2s">
+            <h1 className="text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-bold mb-4 tracking-tight">
+              <span className="bg-gradient-to-r from-purple-400 via-pink-400 to-purple-400 bg-clip-text text-transparent bg-[length:200%_auto] animate-[gradient_3s_linear_infinite]">
+                Timex Media
+              </span>
+            </h1>
+          </AnimateOnView>
 
-          <div
-            className={`flex flex-col sm:flex-row gap-3 justify-center items-center transition-all duration-700 ${
-              showContent ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"
-            }`}
-            style={{ transitionDelay: showContent ? "700ms" : "0ms" }}
-          >
-            <AnimatedButton text="🎬 Book Your Shoot →" link="/book-now" />
-            <Link href="#services">
-              <button className="group px-5 py-2.5 text-sm bg-white/10 backdrop-blur-md border border-purple-500/50 text-white font-semibold rounded-lg hover:bg-purple-600/30 hover:border-purple-400 transition-all duration-300">
-                <span className="inline-block mr-2 group-hover:rotate-12 transition-transform">
-                  🎥
+          <AnimateOnView animation="fade-in-up" delay="0.3s">
+            <div className="text-base sm:text-lg md:text-2xl text-gray-200 max-w-3xl mx-auto mb-4 leading-relaxed">
+              <span className="font-bold">Capturing Dreams, </span>
+              <span className="relative">
+                <span className="text-transparent bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text font-bold">
+                  {text}
                 </span>
-                View Our Work
-                <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">
-                  →
-                </span>
-              </button>
-            </Link>
-          </div>
+                <span className="absolute -bottom-1 left-0 w-full h-[2px] bg-gradient-to-r from-purple-400 to-pink-500 animate-pulse"></span>
+              </span>
+            </div>
+
+            <p className="text-lg sm:text-xl md:text-2xl text-gray-100 max-w-3xl mx-auto mb-8 leading-relaxed font-medium">
+              Where Every Pixel Tells a Story
+            </p>
+
+            <p className="text-base sm:text-lg text-gray-300 max-w-2xl mx-auto mb-8">
+              Professional photography & videography that makes your property
+              <span className="text-purple-400 font-semibold">
+                {" "}
+                irresistible to buyers
+              </span>
+            </p>
+          </AnimateOnView>
+
+          <AnimateOnView animation="fade-in-up" delay="0.4s">
+            <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
+              <AnimatedButton text="🎬 Book Your Shoot →" link="/book-now" />
+              <Link href="#services">
+                <button className="group px-8 py-3.5 bg-white/10 backdrop-blur-md border border-purple-500/50 text-white font-semibold rounded-lg hover:bg-purple-600/30 hover:border-purple-400 transition-all duration-300">
+                  <span className="inline-block mr-2 group-hover:rotate-12 transition-transform">
+                    🎥
+                  </span>
+                  View Our Work
+                  <span className="inline-block ml-2 group-hover:translate-x-1 transition-transform">
+                    →
+                  </span>
+                </button>
+              </Link>
+            </div>
+          </AnimateOnView>
+
+          <AnimateOnView animation="fade-in-up" delay="0.5s">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-2 pt-2 border-t-0">
+              <div className="group hover:scale-105 transition-all duration-300 cursor-pointer">
+                <p className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  500+
+                </p>
+                <p className="text-sm text-gray-300 mt-1 group-hover:text-purple-300 transition">
+                  Properties Shot
+                </p>
+              </div>
+              <div className="group hover:scale-105 transition-all duration-300 cursor-pointer">
+                <p className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  50+
+                </p>
+                <p className="text-sm text-gray-300 mt-1 group-hover:text-purple-300 transition">
+                  Happy Agents
+                </p>
+              </div>
+              <div className="group hover:scale-105 transition-all duration-300 cursor-pointer">
+                <p className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  24hr
+                </p>
+                <p className="text-sm text-gray-300 mt-1 group-hover:text-purple-300 transition">
+                  Fast Turnaround
+                </p>
+              </div>
+              <div className="group hover:scale-105 transition-all duration-300 cursor-pointer">
+                <p className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  4.9★
+                </p>
+                <p className="text-sm text-gray-300 mt-1 group-hover:text-purple-300 transition">
+                  Client Rating
+                </p>
+              </div>
+            </div>
+          </AnimateOnView>
         </div>
 
-        <div
-          className={`absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce transition-opacity duration-500 ${
-            showContent ? "opacity-0" : "opacity-100"
-          }`}
-        >
+        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 animate-bounce">
           <div className="w-6 h-10 rounded-full border-2 border-purple-400/60 flex justify-center">
             <div className="w-1.5 h-2 bg-purple-400 rounded-full mt-2 animate-ping"></div>
           </div>
@@ -475,3 +405,4 @@ export default function Home() {
     </div>
   );
 }
+
