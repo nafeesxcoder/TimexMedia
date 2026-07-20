@@ -3,6 +3,6 @@
   "target": {
     "namespace": "android_app",
     "package_name": "com.timexmedia.twa",
-    "sha256_cert_fingerprints": ["YOUR_SHA256_FINGERPRINT"]
+    "sha256_cert_fingerprints": ["80:B2:99:C2:5E:19:BB:75:98:61:54:9F:6B:FA:6A:86:CC:4E:48:10:C6:E5:44:A9:97:A3:D6:86:83:D0:39:2D"]
   }
 }]
